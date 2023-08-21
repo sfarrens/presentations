@@ -14,7 +14,7 @@ graph TD;
     C-->D;
     D-->|an edge label| E
 </mermaid>
-<!-- .element: style="height: 250px;" -->
+<!-- .element: style="height: 300px;" -->
 
 <!-- .element: style="font-size: 50%;" -->You can tweak the height of the diagram by following the closing tag with an [element attribute](https://revealjs.com/markdown/#element-attributes):  
 `<!-- .element: style="height: 400px;" -->`

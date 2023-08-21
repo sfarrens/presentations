@@ -8,7 +8,7 @@ description: A framework for easily creating beautiful presentations using HTML
 author: jekyll-revealjs contributors
 
 # The Reveal theme
-reveal_theme: black.css
+reveal_theme: night_plus.css
 
 # The Reveal transition
 reveal_transition: default
@@ -27,6 +27,11 @@ reveal_notes_server: false
 
 # Additional reveal.js options
 reveal_options: 
+  # center: false
+  width: 100%
+  height: 100%
+  slideNumber: false
+  transition: 'slide'
 
 # Additional reveal.js dependencies
 reveal_dependencies:
