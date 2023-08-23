@@ -14,7 +14,7 @@ reveal_theme: night_plus.css
 reveal_transition: default
 
 # Path to the used theme (defaults to the Reveal.js standard theme path)
-reveal_theme_path: reveal.js/css/theme/ 
+reveal_theme_path: assets/css/ 
 
 # Additional custom CSS paths
 extra_css: 
