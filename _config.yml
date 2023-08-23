@@ -27,14 +27,15 @@ reveal_notes_server: false
 
 # Additional reveal.js options
 reveal_options: 
-  # center: false
   width: 100%
   height: 100%
   slideNumber: false
   transition: 'slide'
+  margin: 0.3
 
 # Additional reveal.js dependencies
 reveal_dependencies:
+  - "{ src: 'reveal.js/plugin/math/math.js'},"
 
 # Reveal.js subdirectory
 reveal_path: reveal.js/
