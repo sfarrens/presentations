@@ -1,4 +1,7 @@
-## Version control
+## Version control I
+### Introduction to Git
+
+--
 
 > Writing code can be hard work! This is particularly felt when things are not working as we expect.
 
@@ -33,11 +36,13 @@ cd example
 git init
 ```
 
-> Now we can check the `status` of this repository.
+> Now, we can check the `status` of this repository.
 
 ```bash
 git status
 ```
+
+> Not much going on so far. 🥱
 
 --
 
@@ -59,12 +64,11 @@ def hubble(redshift):
 > This file contains a very simple function to calculate the [Hubble Parameter](https://en.wikipedia.org/wiki/Hubble%27s_law) *($H_0$)* as a function of redshift in a matter-dominated universe.*
 
 > *We will be improving this code later on.
-
 <!-- .element: style="font-size: 50%;" -->
 
 --
 
-> Now let's check the `status` of this repository again.
+> Now, let's check the `status` of this repository again.
 
 ```bash
 git status
@@ -86,13 +90,19 @@ git add cosmology.py
 git commit --message "Added cosmology.py module."
 ```
 
-> Now we can view a list of our commit states using the `log` command.
+> Now, we can view a list of our commit states using the `log` command.
 
 ```bash
 git log
 ```
 
 > We can see who authored the commit, when it was made and the message we provided above.
+
+<mermaid>
+gitGraph
+       commit id: "First commit"
+</mermaid>
+<!-- .element: style="height: 150px;" -->
 
 --
 
@@ -112,7 +122,24 @@ def hubble(redshift, cosmo_dict):
 
 --
 
-> We can redo the steps to add and commit our modified file and then check the log. You should now see two commits with unique 40-character identifiers.
+> We can redo the steps to add and commit our modified file and then check the log. 
+
+```bash
+git add cosmology.py
+git commit --message "Removed hard-coded values."
+git log
+```
+
+> You should now see two commits with unique 40-character identifiers.
+
+<mermaid>
+gitGraph
+       commit id: "First commit"
+       commit id: "Second commit"
+</mermaid>
+<!-- .element: style="height: 150px;" -->
+
+--
 
 > We can go back to our first commit state using the `checkout` command.
 
@@ -154,6 +181,15 @@ git checkout critical_density
 
 > The `log` command will show that this branch is at the same commit state as the `main` branch. 
 
+<mermaid>
+gitGraph
+       commit id: "First commit"
+       commit id: "Second commit"
+       branch critical_density
+       checkout critical_density
+</mermaid>
+<!-- .element: style="height: 150px;" -->
+
 --
 
 > Now, let's add our critical density function to `cosmology.py` and follow the usual steps to add and commit the changes.
@@ -167,16 +203,73 @@ def critical_density(redshift):
     return (3.0 * H_z_si**2) / (8.0 * np.pi * G)
 ```
 
-> The log will now show the `critical_density` branch at a different state to that of `main`.
+```bash
+git add cosmology.py
+git commit --message "Added critical density function."
+git log
+```
 
 --
 
+> The log will now show the `critical_density` branch at a different state to that of `main`.
+
 <mermaid>
-graph TD;
-    A-->B;
-    B-->C;
-    B-->D;
-    C-->D;
-    D-->|an edge label| E
+gitGraph
+       commit id: "1"
+       commit id: "2"
+       branch critical_density
+       checkout critical_density
+       commit id: "3"
 </mermaid>
-<!-- .element: style="height: 300px;" -->
+<!-- .element: style="height: 200px;" -->
+
+--
+
+We can check the difference between branches using the `diff` command.
+
+```bash
+git diff main
+```
+
+You should see the lines we added to `cosmology.py` highlighted in green.
+
+--
+
+> We could continue to work on this branch, but once our feature has been implemented we need to *merge* these changes back into the `main` branch. We can do this with the `merge` command.
+
+```bash
+git checkout main
+git merge critical_density
+```
+
+<mermaid>
+gitGraph
+       commit id: "1"
+       commit id: "2"
+       branch critical_density
+       checkout critical_density
+       commit id: "3"
+       checkout main
+       merge critical_density id: "merge"
+</mermaid>
+<!-- .element: style="height: 200px;" -->
+
+--
+
+> The log will now show that both branches are at the same commit state and `diff` will show no differences between the two branches. 
+
+> This is a good time to **clean up**! We can use the `-d` option for `branch` to delete our merged feature branch.
+
+```bash
+git branch -d critical_density
+```
+
+> The log will look like we had always been working in the `main` branch.
+
+<mermaid>
+gitGraph
+       commit id: "1"
+       commit id: "2"
+       commit id: "3"
+</mermaid>
+<!-- .element: style="height: 100px;" -->
