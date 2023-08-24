@@ -12,7 +12,7 @@
 import numpy as np
 import numpy.testing as npt
 
-from ..cosmology import hubble
+from mycosmo.cosmology import hubble
 
 
 class TestCosmology:
@@ -45,7 +45,7 @@ class TestCosmology:
 > We can use the [pytest](https://docs.pytest.org/) package to run the unit tests.
 
 ```bash
-pytest --verbose mycosmo
+python -m pytest --verbose mycosmo
 ```
 
 > If all went well `TestCosmology::test_hubble` should have *PASSED*.
@@ -74,11 +74,13 @@ matter = cosmo_dict["omega_m_0"] * (1 + redshift) ** 4
 > We can invoke these extra features using their corresponding command line arguments.
 
 ```bash
-pytest --verbose --black --emoji --pydocstyle --cov=mycosmo
+python -m pytest --verbose --black --emoji --pydocstyle --cov=mycosmo
 ```
 
 > Note that the documentation tests will fail because we done't have any yet! 😰
 <!-- .element: style="font-size: 50%;" -->
+
+> The coverage report tells us which fraction of the code has been covered by unit tests.
 
 --
 
