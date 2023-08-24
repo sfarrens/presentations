@@ -195,10 +195,10 @@ gitGraph
 > Now, let's add our critical density function to `cosmology.py` and follow the usual steps to add and commit the changes.
 
 ```python
-def critical_density(redshift):
+def critical_density(redshift, cosmo_dict):
     Mpc = 3.08568e22
     G = 6.6743e-11
-    H_z_si = hubble(redshift) * 1e3 / Mpc
+    H_z_si = hubble(redshift, cosmo_dict) * 1e3 / Mpc
 
     return (3.0 * H_z_si**2) / (8.0 * np.pi * G)
 ```
@@ -206,12 +206,15 @@ def critical_density(redshift):
 ```bash
 git add cosmology.py
 git commit --message "Added critical density function."
-git log
 ```
 
 --
 
 > The log will now show the `critical_density` branch at a different state to that of `main`.
+
+```bash
+git log
+```
 
 <mermaid>
 gitGraph
