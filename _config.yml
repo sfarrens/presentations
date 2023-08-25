@@ -8,7 +8,7 @@ description: A framework for easily creating beautiful presentations using HTML
 author: jekyll-revealjs contributors
 
 # The Reveal theme
-# reveal_theme: white.css
+# reveal_theme: black.css
 reveal_theme: night_plus.css
 
 # The Reveal transition

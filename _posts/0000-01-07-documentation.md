@@ -14,7 +14,7 @@
 
 --
 
-> The API (Application Programming Interface) documention explains how to use the various components that make up your code (i.e. functions, classes, or other objects). This is extremely useful for other developers, but also for users if your code acts as a library (like e.g. [Numpy](https://numpy.org/)).
+> The API (Application Programming Interface) documention explains how to use the various components that make up your code (i.e. functions, classes, and other objects). This is extremely useful for other developers, but also for users if your code acts as a library (like e.g. [Numpy](https://numpy.org/)).
 
 --
 
@@ -32,9 +32,10 @@ sphinx-quickstart docs
 ```
 
 > Note that this only needs to be done once.
+
 <!-- .element: style="font-size: 50%;" -->
 
-> This will add some content to the `docs` directory. 
+> This will add some content to a `docs` directory. 
 
 --
 
@@ -43,40 +44,61 @@ sphinx-quickstart docs
 ```python
 extensions = [
     "sphinx.ext.autodoc",
-    "sphinx.ext.autosummary",
-    "sphinx.ext.doctest",
-    "sphinx.ext.intersphinx",
-    "sphinx.ext.todo",
-    "sphinx.ext.coverage",
-    "sphinx.ext.mathjax",
-    "sphinx.ext.ifconfig",
-    "sphinx.ext.viewcode",
-    "sphinx.ext.napoleon",
-    "sphinx.ext.intersphinx",
     "sphinx.ext.autosectionlabel",
+    "sphinx.ext.autosummary",
+    "sphinx.ext.coverage",
+    "sphinx.ext.doctest",
+    "sphinx.ext.ifconfig",
+    "sphinx.ext.intersphinx",
+    "sphinx.ext.mathjax",
+    "sphinx.ext.napoleon",
+    "sphinx.ext.todo",
+    "sphinx.ext.viewcode",
     "numpydoc",
 ]
 ```
 
+> We will go through some of these extensions as they come up.
+
+<!-- .element: style="font-size: 50%;" -->
+
 --
 
-> We can now build the source `.rst` files for the modules in our Python package
+> If we have enabled the `sphinx.ext.autodoc` option, we can automatically generate API documentation for all of the modules in our Python package, but first we have to tell Sphinx where to find them. To do so we will need to update the system path for `conf.py` by adding the following to the top of the file.
+
+```python
+import sys
+import os
+
+
+sys.path.insert(0, os.path.abspath('../..'))
+```
+
+--
+
+> Then we can run the following command to generate source `.rst` files for each of the Python modules.
 
 ```bash
 sphinx-apidoc --module-first -feo docs/source mycosmo
 ```
 
-> and finally the HTML files we want to navigate.
+> This command will need to be re-run every time we add or remove a module from the package.
+
+<!-- .element: style="font-size: 50%;" -->
+
+--
+
+> Finally, we can build the HTML containing our API documentation.
 
 ```bash
 sphinx-build docs/source docs/build
 ```
 
-> If we open `docs/build/index.html` we can see the results. Not very useful so far 😑.
+> If we open `docs/build/index.html` we can see the results. Not very useful so far. 😑
 
 --
 
-> We need to add some docstrings to our modules and functions. Open `cosmology.py` and add the following to the very top of the file.
+> We need to add some docstrings to our modules and functions! Open `cosmology.py` and add the following to the very top of the file.
 
 ```python
 """Cosmology.
@@ -88,45 +110,105 @@ This module implements various cosmology routines.
 
 > Now rebuild the HTML files.
 
-> You should see the information we added for the corresponding module.
+> You should see the information we added for the corresponding module, which lets the user know what this modules contains.
 
 --
 
-> Now, let's add a more detailed docstring to our `hubble` function right after `def hubble(redshift, cosmo_dict):`.
+> Now, let's add a more detailed docstring to our `hubble` function (right after `def hubble(redshift, cosmo_dict):`).
+
+> Let's start by giving our function a name and a short description of what it does.
 
 ```python
-    r"""Hubble Parameter.
+    """Hubble Parameter.
 
-    Calculate the Hubble parameter at a given redshift.
-
-    Parameters
-    ----------
-    redshift : float
-        Redshift
-    cosmo_dict : dict
-        Dictionary of cosmological constants
-
-    Returns
-    -------
-    float
-        Value of the Hubble parameter
-
-    Notes
-    -----
-    Implements
-
-    .. math::
-        H(z) = \sqrt{H_0^2 \Omega_{m,0}(1+z)^3 + \Omega_{Lambda,0} +
-            \Omega_{K,0}(1+z)^2}
+    Calculate the Hubble parameter at a given redshift using the cosmological parameter values provided.
 
     """
 ```
 
 --
 
-> If you rebuild the docs again, you should see a lot more information along with some rendered LaTeX!
+> This is a good start, but we could help the users and other developers better understand how to use this function by explicitly detailing what the expected inputs and outputs of this function are.
 
-> Hoever, The default look is still quite... 🤮
+> There are various different formatting standards for doing this. My personal preference is [numpydoc](https://numpydoc.readthedocs.io/en/latest/format.html).
+
+> To use this standard we will need to enable the `sphinx.ext.napoleon` and `numpydoc` extensions.
+
+--
+
+> Let's update our function's docstring with the expected inputs according to the `numpydoc` standard.
+
+```python
+    """
+    Parameters
+    ----------
+    redshift : float or numpy.ndarray
+        Redshift(s) at which the Hubble parameter should be calculated
+    cosmo_dict : dict
+        Dictionary of cosmological constants. Must contain the following keys:
+        - ``H0``: The Hubble parameter value at redshift zero.
+        - ``omega_m_0``: The matter density at redshift zero.
+        - ``omega_k_0``: The curvature density at redshift zero.
+        - ``omega_lambda_0``: The dark energy density at redshift zero.
+    """
+```
+
+--
+
+> This lets the user know what the input variable names are, what the expected data types for those variables are and some additional information to better understand what these variables represent.
+
+> We might also find this useful ourselves if we come back to the code after a long break and forget what we have done. 😅
+<!-- .element: style="font-size: 50%;" -->
+
+--
+
+> Let's do the same thing for the outputs of the function.
+
+```python
+"""
+Returns
+-------
+float or numpy.ndarray
+    Value of the Hubble parameter (km/s/Mpc) at the specified redshift(s) for a given cosmology.
+"""
+```
+
+> Now the user should know what to expect in terms of the output object type and how to interpret the values.
+
+--
+
+> We can take this one step further and add some notes that provide more context for our function.
+
+```python
+"""
+Notes
+-----
+Implements
+
+.. math::
+    H(z) = \sqrt{H_0^2 \Omega_{m,0}(1+z)^3 + \Omega_{Lambda,0} +
+        \Omega_{K,0}(1+z)^2}
+"""
+```
+
+> If you rebuild the docs again, you should see some nice rendered LaTeX! 🤓
+
+--
+
+> We can add another useful feature by taking advantage of the `sphinx.ext.intersphinx` extension to link to the core Python API documentation and to other third-party packagies we are using in our project.
+
+```python
+intersphinx_mapping = {
+    "python": ("http://docs.python.org/3", None),
+    "numpy": ("https://numpy.org/doc/stable/", None),
+}
+```
+
+> Now users can look up any of the data types we expect as inputs or outputs to our own functions.
+
+--
+
+> We have significantly improved the content of our documentation.  Hoever, The default look is still quite... 🤮
 
 > We can fix this by choosing a new [theme](https://sphinx-themes.org/) in `conf.py`
 
