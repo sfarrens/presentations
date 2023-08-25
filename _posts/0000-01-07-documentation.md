@@ -8,7 +8,7 @@
 
 --
 
-> The `README.md` is a markdown file and serves as the entry point for the repository. It should be provide concise details on how to install and run the code along with the scope it covers. A good `README.md` could be the difference between someone using your code or not.
+> The `README.md` is a *Markdown* file and serves as the entry point for the repository. It should be provide concise details on how to install and run the code along with the scope it covers. A good `README.md` could be the difference between someone using your code or not.
 
 > GitHub and GitLab both offer the option to initialise a repository with a `README.md`.
 
@@ -20,7 +20,7 @@
 
 <img src="https://www.jetbrains.com/pycharm/guide/assets/sphinxdoc-5743f4ae.png" alt="Sphinx logo" width="200" class="reveal.imgblock">
 
-> [Sphinx](https://www.sphinx-doc.org/) is a package that automatically generates API documentation from *docstrings* in Python code.
+> [Sphinx](https://www.sphinx-doc.org/) is a package that automatically generates API documentation from *docstrings* in Python code written in *reStructuredText* syntax.
 
 --
 
@@ -44,21 +44,15 @@ sphinx-quickstart docs
 ```python
 extensions = [
     "sphinx.ext.autodoc",
-    "sphinx.ext.autosectionlabel",
-    "sphinx.ext.autosummary",
-    "sphinx.ext.coverage",
     "sphinx.ext.doctest",
-    "sphinx.ext.ifconfig",
     "sphinx.ext.intersphinx",
-    "sphinx.ext.mathjax",
     "sphinx.ext.napoleon",
-    "sphinx.ext.todo",
     "sphinx.ext.viewcode",
     "numpydoc",
 ]
 ```
 
-> We will go through some of these extensions as they come up.
+> We will go through each of these extensions as they come up.
 
 <!-- .element: style="font-size: 50%;" -->
 
@@ -94,7 +88,9 @@ sphinx-apidoc --module-first -feo docs/source mycosmo
 sphinx-build docs/source docs/build
 ```
 
-> If we open `docs/build/index.html` we can see the results. Not very useful so far. 😑
+> If we open `docs/build/index.html` we can see the results. 
+
+> Not very useful so far. 😑
 
 --
 
@@ -145,11 +141,7 @@ This module implements various cosmology routines.
     redshift : float or numpy.ndarray
         Redshift(s) at which the Hubble parameter should be calculated
     cosmo_dict : dict
-        Dictionary of cosmological constants. Must contain the following keys:
-        - ``H0``: The Hubble parameter value at redshift zero.
-        - ``omega_m_0``: The matter density at redshift zero.
-        - ``omega_k_0``: The curvature density at redshift zero.
-        - ``omega_lambda_0``: The dark energy density at redshift zero.
+        Dictionary of cosmological constants. 
     """
 ```
 
@@ -159,6 +151,22 @@ This module implements various cosmology routines.
 
 > We might also find this useful ourselves if we come back to the code after a long break and forget what we have done. 😅
 <!-- .element: style="font-size: 50%;" -->
+
+--
+
+> We can actually add more detail. For example, the user doesn't know what the `cosmo_dict` dictionary should contain. Let's fix that!
+
+```python
+    """
+    cosmo_dict : dict
+        Dictionary of cosmological constants. Must contain the following keys:
+
+        * ``H0``: The Hubble parameter value at redshift zero.
+        * ``omega_m_0``: The matter density at redshift zero.
+        * ``omega_k_0``: The curvature density at redshift zero.
+        * ``omega_lambda_0``: The dark energy density at redshift zero.
+    """
+```
 
 --
 
@@ -183,11 +191,11 @@ float or numpy.ndarray
 """
 Notes
 -----
-Implements
+This function implements the calculation of the Hubble parameter as follows:
 
 .. math::
-    H(z) = \sqrt{H_0^2 \Omega_{m,0}(1+z)^3 + \Omega_{Lambda,0} +
-        \Omega_{K,0}(1+z)^2}
+    H(z) = \sqrt{H_0^2 (\Omega_{m,0}(1+z)^3 + \Omega_{k,0}(1+z)^2 +
+        \Omega_{\Lambda,0})}
 """
 ```
 
@@ -195,7 +203,40 @@ Implements
 
 --
 
-> We can add another useful feature by taking advantage of the `sphinx.ext.intersphinx` extension to link to the core Python API documentation and to other third-party packagies we are using in our project.
+> At this stage we have some pretty decent API documentation for this function, however we can always do more.
+
+> Let's add an example of how to use this function.
+
+```python
+"""
+Example
+-------
+>>> from mycosmo.cosmology import hubble
+>>> cosmo_dict = {"H0": 70, "omega_m_0": 0.3, "omega_k_0": 0.0, "omega_lambda_0": 0.7}
+>>> hubble(0.0, cosmo_dict)
+70.0
+"""
+```
+
+--
+
+> This will make it significantly easier for someone to use this function for the first time.
+
+> If we enable `sphinx.ext.doctest`, we can even test that the example provided works as expected!
+
+```bash
+sphinx-build -b doctest -E docs/source docs/build
+```
+
+--
+
+> Now that we have some comprehensive documentation for this function, let's make things a bit easier to navigate.
+
+> We can enable the `sphinx.ext.viewcode` extension so that users and other developers can see the actual code implementation within the API documentation.
+
+--
+
+> We can add another useful feature by taking advantage of the `sphinx.ext.intersphinx` extension to link to the core Python API documentation and to other third-party packagies we are using in our project. We just need to provide the appopriate URLs for the packages. 
 
 ```python
 intersphinx_mapping = {
@@ -216,7 +257,17 @@ intersphinx_mapping = {
 html_theme = "sphinx_book_theme"
 ```
 
-> and rebuilding the HTML. Much better! 🤩
+> and rebuilding the HTML.  
+
+> Much better! 🤩
+
+--
+
+> Finally, we can also add custom pages to our `docs/source` directory to include infomation about how to install the package, which paper should be cited if the code is used, etc.
+
+> The `myst_parser` plug-in makes it possible to add content in *Markdown* instead of *reStructuredText*.
+
+> To view the pages we simply need to make sure they are included under the `toctree` in `index.rst`.
 
 --
 
