@@ -2,7 +2,7 @@
 
 --
 
-> Once you have some working code, it is a very good idea to write some accompanying *unit tests*. This ensures that individual components of our code (e.g. functions, classes, etc.) do what we expect them to do. This also helps us avoid introducing bugs into the code, as the tests should fail if we break something.
+> Once we have some working code, it is a very good idea to write some accompanying *unit tests*. This ensures that individual components of our code (e.g. functions, classes, etc.) do what we expect them to do. This also helps us avoid introducing bugs into the code, as the tests should fail if we break something.
 
 --
 
@@ -71,7 +71,7 @@ matter = cosmo_dict["omega_m_0"] * (1 + redshift) ** 4
 
 --
 
-> We can invoke these extra features using their corresponding command line arguments.
+> We can invoke these extra features using the corresponding command line options.
 
 ```bash
 python -m pytest --verbose --black --emoji --pydocstyle --cov=mycosmo
@@ -80,7 +80,7 @@ python -m pytest --verbose --black --emoji --pydocstyle --cov=mycosmo
 > Note that the documentation tests will fail because we done't have any yet! 😰
 <!-- .element: style="font-size: 50%;" -->
 
-> The coverage report tells us which fraction of the code has been covered by unit tests.
+> The coverage report tells us which fraction of the code has been covered by unit tests.[$^{11}$](#/11/12)
 
 --
 

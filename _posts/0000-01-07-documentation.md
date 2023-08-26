@@ -4,17 +4,17 @@
 
 > Now that we have a stable and tested code, we need to make sure users understand how to run it and developers understand how to contribute to it.
 
-> There are two main places this needs to be done: a `README.md` file and *API* documentation.
+> There are two main places this needs to be done: a *README* file and *API* documentation.
 
 --
 
-> The `README.md` is a *Markdown* file and serves as the entry point for the repository. It should be provide concise details on how to install and run the code along with the scope it covers. A good `README.md` could be the difference between someone using your code or not.
+> The *README* is usually a *Markdown* file (`README.md`)[$^{12}$](#/11/13) and serves as the entry point for the repository. It should provide concise details on how to install and run the code along with the scope it covers. A good `README.md` could be the difference between someone using your code or not.
 
 > GitHub and GitLab both offer the option to initialise a repository with a `README.md`.
 
 --
 
-> The API (Application Programming Interface) documention explains how to use the various components that make up your code (i.e. functions, classes, and other objects). This is extremely useful for other developers, but also for users if your code acts as a library (like e.g. [Numpy](https://numpy.org/)).
+> The *API* (Application Programming Interface) documention explains how to use the various components that make up your code (i.e. functions, classes, and other objects). This is extremely useful for other developers, but also for users if your code acts as a library (like e.g. [Numpy](https://numpy.org/)).
 
 --
 
@@ -24,22 +24,18 @@
 
 --
 
-> We can start building our API documentation by running the following.
+> We can start building our API documentation by running the following.[$^{13}$](#/11/14)
 
 ```bash
 mkdir docs
 sphinx-quickstart docs
 ```
 
-> Note that this only needs to be done once.
-
-<!-- .element: style="font-size: 50%;" -->
-
 > This will add some content to a `docs` directory. 
 
 --
 
-> Inside `docs/source` we can find a file called `conf.py`, where the configuration options for Sphinx can be set. In particular, various Sphinx extensions. My personal preference is to set the following:
+> Inside `docs/source` we can find a file called `conf.py`, where the configuration options for Sphinx can be set. In particular, various [Sphinx extensions](https://www.sphinx-doc.org/en/master/usage/extensions/index.html). My personal preference is to set the following:
 
 ```python
 extensions = [
@@ -70,15 +66,11 @@ sys.path.insert(0, os.path.abspath('../..'))
 
 --
 
-> Then we can run the following command to generate source `.rst` files for each of the Python modules.
+> Then we can run the following command to generate source `.rst` files for each of the Python modules.[$^{14}$](#/11/15)
 
 ```bash
-sphinx-apidoc --module-first -feo docs/source mycosmo
+sphinx-apidoc -Mfeo docs/source mycosmo
 ```
-
-> This command will need to be re-run every time we add or remove a module from the package.
-
-<!-- .element: style="font-size: 50%;" -->
 
 --
 
@@ -106,7 +98,7 @@ This module implements various cosmology routines.
 
 > Now rebuild the HTML files.
 
-> You should see the information we added for the corresponding module, which lets the user know what this modules contains.
+> You should see the information we added for the corresponding module, which lets the user know what this module contains.
 
 --
 
@@ -154,7 +146,7 @@ This module implements various cosmology routines.
 
 --
 
-> We can actually add more detail. For example, the user doesn't know what the `cosmo_dict` dictionary should contain. Let's fix that!
+> We can actually add more detail. For example, the user doesn't know what the `cosmo_dict` dictionary should contain. Let's fix that.[$^{15}$](#/11/16)
 
 ```python
     """
@@ -199,7 +191,7 @@ This function implements the calculation of the Hubble parameter as follows:
 """
 ```
 
-> If you rebuild the docs again, you should see some nice rendered LaTeX! 🤓
+> If we rebuild the docs again, we should see some nice rendered *LaTeX*! 🤓
 
 --
 
@@ -222,7 +214,7 @@ Example
 
 > This will make it significantly easier for someone to use this function for the first time.
 
-> If we enable `sphinx.ext.doctest`, we can even test that the example provided works as expected!
+> If we enable `sphinx.ext.doctest`, we can even test that the example provided works as expected.[$^{16}$](#/11/17)
 
 ```bash
 sphinx-build -b doctest -E docs/source docs/build
@@ -275,4 +267,4 @@ html_theme = "sphinx_book_theme"
 
 > Add docstrings to the `critical_density` function and the remaining modules (`constants.py`, `__init__.py`). Rebuild the HTML to make sure everything renders correctly and make sure all the `PYDOCSTYLE` tests are passing when you run `pytest`.
 
-> As with the [previous exercise](#/5/7), use the [Git workflow](#/4/18) you learned to implement the changes via a MR/PR.
+> As with the [previous exercise](#/5/7), use the [Git workflow](#/4/18) you learned to implement the changes via a MR/PR. Again it is recommended to work in pairs.

@@ -36,7 +36,7 @@ cd example
 git init
 ```
 
-> Now, we can check the `status` of this repository.
+> Now, we can check the status of this repository with the `status` command.
 
 ```bash
 git status
@@ -61,14 +61,14 @@ def hubble(redshift):
     return np.sqrt(hubble_const**2 * (matter + curvature + dark_energy))
 ```
 
-> This file contains a very simple function to calculate the [Hubble Parameter](https://en.wikipedia.org/wiki/Hubble%27s_law) *($H_0$)* as a function of redshift in a matter-dominated universe.*
+> This file contains a very simple function to calculate the [Hubble Parameter](https://en.wikipedia.org/wiki/Hubble%27s_law) *($H(z)$)* as a function of redshift in a matter-dominated universe.*
 
 > *We will be improving this code later on.
 <!-- .element: style="font-size: 50%;" -->
 
 --
 
-> Now, let's check the `status` of this repository again.
+> Now, let's check the status of this repository again.
 
 ```bash
 git status
@@ -106,7 +106,7 @@ gitGraph
 
 --
 
-> Let's take another look at our `hubble` function and make some improvements. We can remove the hard-coded cosmological parameters and instead provide a dictionary object as an argument.
+> Let's take another look at our `hubble` function and make some improvements.[$^1$](#/11/2) We can remove the hard-coded cosmological parameters and instead provide a dictionary object as an argument.
 
 ```python
 def hubble(redshift, cosmo_dict):
@@ -169,15 +169,11 @@ git branch critical_density
 
 --
 
-> Running the `branch` command on its own will list the available branches, where you should see a `*` next to `main` and our new `critical_density` branch. To switch to this new branch we use the `checkout` command.*
+> Running the `branch` command on its own will list the available branches, where you should see a `*` next to `main` and our new `critical_density` branch. To switch to this new branch we use the `checkout` command.[$^2$](#/11/3)
 
 ```bash
 git checkout critical_density
 ```
-
-> *You can combine the two previous commands using the `-b` option for `checkout`. e.g. `git checkout -b critical_density`.
-
-<!-- .element: style="font-size: 50%;" -->
 
 > The `log` command will show that this branch is at the same commit state as the `main` branch. 
 
@@ -261,13 +257,13 @@ gitGraph
 
 > The log will now show that both branches are at the same commit state and `diff` will show no differences between the two branches. 
 
-> This is a good time to **clean up**! We can use the `-d` option for `branch` to delete our merged feature branch.
+> This is a good time to **clean up**! We can use the `-d` option for `branch` to delete our merged feature branch.[$^3$](#/11/4)
 
 ```bash
 git branch -d critical_density
 ```
 
-> The log will look like we had always been working in the `main` branch.
+> The log will look the same as it would if we had always been working in the `main` branch.
 
 <mermaid>
 gitGraph

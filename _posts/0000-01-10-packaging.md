@@ -10,7 +10,7 @@
 
 --
 
-> Let's write a `pyproject.toml` for our package, which we have called `mycosmo`. We need to put this file at the root level of the repository.
+> Let's write a `pyproject.toml` for our package, which we have called `mycosmo`.[$^{24}$](#/11/25) We need to put this file at the root level of the repository.
 
 ```bash
 touch pyproject.toml
@@ -74,7 +74,7 @@ lint = ["black"]
 release = ["build", "twine"]
 ```
 
-> And a little bonus, we can also add an option to install all of the optional dependencies.
+> And, as a little bonus, we can also add an option to install all of the optional dependencies.
 
 ```toml
 dev = ["mycosmo[docs,lint,release,test]"]
@@ -93,7 +93,7 @@ convention = "numpy"
 
 ```toml
 [tool.pytest.ini_options]
-addopts = ["--verbose", "--black", "--emoji", "--pydocstyle", "--cov=mypack"]
+addopts = ["--verbose", "--black", "--emoji", "--pydocstyle", "--cov=mycosmo"]
 testpaths = ["mycosmo"]
 ```
 
@@ -113,21 +113,17 @@ pip show mycosmo
 
 --
 
-> We can test our optional dependencies as follows.
+> We can test our optional dependencies as follows.[$^{25}$](#/11/26)
 
 ```bash
 pip install ".[dev]"
 ```
 
-> We can replace `dev` with any of the options we defined [previously](#/9/5) (e.g. `docs`, `tests`, etc.).
-
-<!-- .element: style="font-size: 50%;" -->
-
 --
 
 ## Exercise
 
-> Simply your CI/CD workflows on GitHub and/or Gitlab by taking advantage of the optional dependency options we defined in the `project.toml` file. 
+> Simplify the CI/CD workflows on GitHub and/or Gitlab by taking advantage of the optional dependency options we defined in the `project.toml` file. 
 
 --
 
@@ -143,13 +139,13 @@ pip install ".[dev]"
 python -m build
 ```
 
-> This will create `dist` (distribution) directory. Inside we will find a *wheel* (`.whl`) and compressed *tarball* (`.tar.gz`) of the package. These are the files that need to be uploaded to PyPI.
+> This will create a `dist` (distribution) directory. Inside we will find a *wheel* (`.whl`) and compressed *tarball* (`.tar.gz`) of the package. These are the files that need to be uploaded to PyPI.
 
 > We will use [Twine](https://twine.readthedocs.io/) to do this. 
 
 --
 
-> First, we need to make sure the disyribution is OK.
+> First, we need to make sure the distribution is OK.
 
 ```bash
 twine check dist/*
@@ -165,25 +161,19 @@ twine check dist/*
 
 --
 
-> Before actually uploading to the official PyPI registry, we may want to make sure the package looks OK on the [Test PyPI](https://test.pypi.org/).
+> Before actually uploading to the official PyPI registry, we may want to make sure the package looks OK on the [Test PyPI](https://test.pypi.org/).[$^{26}$](#/11/27)
 
 ```bash
 twine upload --repository testpypi dist/*
 ```
 
-> ⚠️ You should make sure your package name is not already taken.
-<!-- .element: style="font-size: 50%;" -->
-
 --
 
-> Once we are happy with everything, we can upload to the offical PyPI registry.
+> Once we are happy with everything, we can upload to the offical PyPI registry.[$^{27}$](#/11/28)
 
 ```bash
 twine upload dist/*
 ```
-
-> ⚠️ You will need to increase your package version each time you upload a distribution.
-<!-- .element: style="font-size: 50%;" -->
 
 --
 

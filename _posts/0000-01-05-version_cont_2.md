@@ -3,7 +3,7 @@
 
 --
 
-> Now that we are all familiar with the baiscs of *Git* (see [previous section](#/3)), we can look at some of the some of the cloud-based platforms that allow you to host Git repositories. In particular, we will look at [GitHub](https://github.com/) and [GitLab](https://about.gitlab.com/) and some of the tools they offer.
+> Now that we are all familiar with the baiscs of *Git* (see [previous section](#/3)), we can look at some of the some of the cloud-based platforms that allow us to host Git repositories. In particular, we will look at [GitHub](https://github.com/) and [GitLab](https://about.gitlab.com/) and some of the tools they offer.
 
 > We will also look at the `git` commands that allow us to interface with these platforms.
 
@@ -11,22 +11,19 @@
 
 > Both GitHub and GitLab have their own stengths and weaknesses. For your own projects you should choose whichever platform you prefer. It is useful, however, to be familiar with both as for some projects you will have to go along with the platform chosen by the team.
 
-|                     | GitHub | GitLab |
-| ------------------- | ------ | ------ |
-| Free                | ✅*     | ✅      |
-| Forking             | ✅      | ✅      |
-| Mirroring           | ✅      | ⭐️      |
-| Pages               | ✅      | ✅      |
-| CI/CD               | ⭐️      | ✅      |
-| Wiki                | ✅      | ⭐️      |
-| Discussions         | ✅      | ❌      |
-| Issue boards        | ✅      | ⭐️      |
-| Pull/Merge requests | ✅      | ✅      |
-| Containers          | ✅      | ✅      |
+|                     | GitHub          | GitLab |
+| ------------------- | --------------- | ------ |
+| Free                | ✅[$^4$](#/11/5) | ✅      |
+| Forking             | ✅               | ✅      |
+| Mirroring           | ✅               | ⭐️      |
+| Pages               | ✅               | ✅      |
+| CI/CD               | ⭐️               | ✅      |
+| Wiki                | ✅               | ⭐️      |
+| Discussions         | ✅               | ❌      |
+| Issue boards        | ✅               | ⭐️      |
+| Pull/Merge requests | ✅               | ✅      |
+| Containers          | ✅               | ✅      |
 <!-- .element: style="font-size: 60%;" -->
-
-> *There are some limitations for private repositories.
-<!-- .element: style="font-size: 50%;" -->
 
 --
 
@@ -36,6 +33,8 @@
 <!-- .element: style="font-size: 50%;" -->
 
 --
+
+<img src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png" alt="GitHub logo" width="200" class="reveal.imgblock">
 
 ## GitHub
 
@@ -50,6 +49,8 @@ graph LR;
 <!-- .element: style="height: 150px;" -->
 
 --
+
+<img src="https://about.gitlab.com/images/press/logo/png/gitlab-logo-500.png" alt="GitLab logo" width="200" class="reveal.imgblock">
 
 ## GitLab
 
@@ -73,9 +74,7 @@ graph LR;
 git remote add origin <REPOSITORY ADDRESS>
 ```
 
-> Note that the name `origin` is completely arbitrary, but this is the community standard.
-> 
-<!-- .element: style="font-size: 50%;" -->
+> Where, `origin` is just an alias for the remote address.[$^5$](#/11/6)
 
 > We can list the currently attached remote addresses with the `-v` option.
 
@@ -85,7 +84,7 @@ git remote -v
 
 --
 
-> We can use the `push` command to upload our local repository to the remote hosting platform.
+> We can use the `push` command to upload our local repository to the remote hosting platform.[$^6$](#/11/7)
 
 ```bash
 git push -u origin main
@@ -135,7 +134,7 @@ G = 6.6743e-11
 Mpc = 3.08568e22
 ```
 
-> Now, we need to add an import of these constants to cosmology.py as follows
+> Now, we need to add an import of these constants to `cosmology.py` as follows
 
 ```python
 import numpy as np
@@ -154,7 +153,7 @@ def critical_density(redshift, cosmo_dict):
     return (3.0 * H_z_si**2) / (8.0 * np.pi * G)
 ```
 
-> Now, we will add and commit our changes.
+> Now, we will add and commit our changes.[$^7$](#/11/8)
 
 ```bash
 git add -A
@@ -163,21 +162,17 @@ git commit -m "Refactored code, added constants.py module"
 
 --
 
-> Instead of merging these changes locally, we will push the feature branch to our remote repository.
+> Instead of merging these changes locally, we will push the feature branch to our remote repository.[$^8$](#/11/9)
 
 ```bash
 git push origin refactor
 ```
 
-> Pro tip: You can view remote branches with `git branch -a`.
-
-<!-- .element: style="font-size: 50%;" -->
-
 > Then we can open a *Pull Request* (PR, GitHub) or a *Merge Request* (MR, GitLab) to propose a solution to our issue. This will allow us to review the code, propose improvements and discuss the changes before merging to the `main` branch. 
 
 --
 
-> When working in on collaborative project, it is good practice to assign a *developer* (i.e. the person making the changes to the code) and a separate *reviewer* (i.e. the person who will check the merge/pull request) for each issue. When both parties are in a agreement the MR/PR can be merged.
+> When working in on collaborative project, it is good practice to assign a *developer* (i.e. the person making the changes to the code) and a separate *reviewer* (i.e. the person who will check the merge/pull request) for each issue. When both parties are in a agreement, the MR/PR can be merged.
 
 
 #### 👍
@@ -190,10 +185,7 @@ Now, we have to clean everything up!
 
 --
 
-> Start by deleting the remote feature branch (i.e. `refactor` on GitHub/GitLab).*
-
-> *This can usually be done automatically on either platform.
-<!-- .element: style="font-size: 50%;" -->
+> Start by deleting the remote feature branch (i.e. `refactor` on GitHub/GitLab).[$^9$](#/11/10)
 
 > Then you need use the `pull` command to download the changes to the `main` branch.
 
@@ -202,19 +194,15 @@ git checkout main
 git pull origin main
 ```
 
-> Now, we can  delete the local feature branch.
+> Now, we can  delete the local feature branch.[$^{10}$](#/11/11)
 
 ```bash
 git branch -d refactor
 ```
 
-> Pro tip: You can clean the list of remote branches using `git remote prune origin`
-
-<!-- .element: style="font-size: 50%;" -->
-
 --
 
-> We can complete the process we started by closing our issue!
+We can complete the process we started by closing our issue!
 
 
 #### 🥳
