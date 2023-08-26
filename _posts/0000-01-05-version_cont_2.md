@@ -221,7 +221,7 @@ git branch -d refactor
 
 --
 
-Now, you are all set to continue your Git workflow.
+> Now, you are all set to continue your Git workflow.
 
 <mermaid>
 flowchart RL
