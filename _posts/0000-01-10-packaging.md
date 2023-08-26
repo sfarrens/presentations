@@ -46,7 +46,6 @@ docs = [
     "myst-parser",
     "numpydoc",
     "sphinx",
-    "sphinxcontrib-bibtex",
     "sphinx-book-theme",
 ]
 ```
