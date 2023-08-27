@@ -9,20 +9,20 @@
 
 --
 
-> Both GitHub and GitLab have their own stengths and weaknesses. For your own projects you should choose whichever platform you prefer. It is useful, however, to be familiar with both as for some projects you will have to go along with the platform chosen by the team.
+> Both GitHub and GitLab have their own stengths and weaknesses. For your own projects you should choose whichever platform you prefer. It is useful, however, to be familiar with both as for some projects you will have to go along with the platform chosen by the team.[$^4$](#/11/5)
 
-|                     | GitHub          | GitLab |
-| ------------------- | --------------- | ------ |
-| Free                | ✅[$^4$](#/11/5) | ✅      |
-| Forking             | ✅               | ✅      |
-| Mirroring           | ✅               | ⭐️      |
-| Pages               | ✅               | ✅      |
-| CI/CD               | ⭐️               | ✅      |
-| Wiki                | ✅               | ⭐️      |
-| Discussions         | ✅               | ❌      |
-| Issue boards        | ✅               | ⭐️      |
-| Pull/Merge requests | ✅               | ✅      |
-| Containers          | ✅               | ✅      |
+|                     | GitHub | GitLab |
+| ------------------- | ------ | ------ |
+| Free                | ✅      | ✅      |
+| Forking             | ✅      | ✅      |
+| Mirroring           | ✅      | ⭐️      |
+| Pages               | ✅      | ✅      |
+| CI/CD               | ⭐️      | ✅      |
+| Wiki                | ✅      | ⭐️      |
+| Discussions         | ✅      | ❌      |
+| Issue boards        | ✅      | ⭐️      |
+| Pull/Merge requests | ✅      | ✅      |
+| Containers          | ✅      | ✅      |
 <!-- .element: style="font-size: 60%;" -->
 
 --
@@ -68,7 +68,7 @@ graph LR;
 
 --
 
-> In order to connect our local (i.e. on your computer) Git repository with a hosting platform, we will need to provide an address for your *remote* (i.e. online) repository. We can do this with the `remote` command.
+> In order to connect our local (i.e. on your computer) Git repository with a hosting platform, we will need to provide an address for our *remote* (i.e. online) repository. We can do this with the `remote` command.
 
 ```bash
 git remote add origin <REPOSITORY ADDRESS>

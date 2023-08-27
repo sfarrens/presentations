@@ -224,13 +224,13 @@ gitGraph
 
 --
 
-We can check the difference between branches using the `diff` command.
+> We can check the difference between branches using the `diff` command.
 
 ```bash
 git diff main
 ```
 
-You should see the lines we added to `cosmology.py` highlighted in green.
+> You should see the lines we added to `cosmology.py` highlighted in green.
 
 --
 

@@ -12,7 +12,7 @@
 
 --
 
-> $2$: You can combine the two previous commands using the `-b` option for `checkout`. 
+> $2$: Pro tip 😎: You can combine the two previous commands using the `-b` option for `checkout`. 
 
 ```bash
 git checkout -b critical_density
@@ -22,7 +22,7 @@ git checkout -b critical_density
 
 --
 
-> $3$: It is good pratice to make regular focused merges with minimal changes to the code. This make things easier to maintain and reduces the chances of breaking something. Therefore, feature branches should only exist long to resolve the issue for which they were created. Long-lived feature branches are more likely to evolve into a conflicting state. 
+> $3$: It is good pratice to make regular focused merges with minimal changes to the code. This make things easier to maintain and reduces the chances of breaking something. Therefore, feature branches should only exist long enough to resolve the issue for which they were created. Long-lived feature branches are more likely to evolve into a conflicting state. 
 
 [Return to slide](#/3/17)
 
@@ -126,7 +126,7 @@ git remote prune origin
 
 --
 
-> $19$: Unlike the unit tests, we don't care about system dependencies for building our API documentation. This is not something we expect the user to do. So, as long as we can get it work on one machine, we are good.
+> $19$: Unlike the unit tests, we don't care about system dependencies for building our API documentation. This is not something we expect the user to do. So, as long as we can get it to work on one machine, we are good.
 
 [Return to slide](#/7/9)
 

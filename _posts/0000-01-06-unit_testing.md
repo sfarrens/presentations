@@ -74,7 +74,7 @@ matter = cosmo_dict["omega_m_0"] * (1 + redshift) ** 4
 > We can invoke these extra features using the corresponding command line options.
 
 ```bash
-python -m pytest --verbose --black --emoji --pydocstyle --cov=mycosmo
+python -m pytest --verbose --black --emoji --pydocstyle --cov=mycosmo mycosmo
 ```
 
 > Note that the documentation tests will fail because we done't have any yet! 😰
