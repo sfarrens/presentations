@@ -2,7 +2,7 @@
 
 --
 
-> Some final points to take into consideration is ensuring some backwards compatiblilty of our code for the sake of *reproducible research*. The lack of reproducibility of some key scientific results in recent years has become a serious problem. Enmourmous data sets and extensive pipelines with changing parts mean that it can be almost impossible to recreate a given result exactly.
+> A final point to take into consideration is ensuring some backwards compatiblilty of our code for the sake of *reproducible research*. The lack of reproducibility of some key scientific results in recent years has become a serious problem. Enmourmous data sets and extensive pipelines with changing parts mean that it can be almost impossible to recreate a given result exactly.
 
 > That doesn't mean, however, that we can't make an effort to guarantee as much reproducibility as possible. 🫡
 
@@ -72,7 +72,7 @@ dependencies:
 
 <img src="https://upload.wikimedia.org/wikipedia/en/thumb/f/f4/Docker_logo.svg/120px-Docker_logo.svg.png" alt="Docker logo" width="200" class="reveal.imgblock">
 
-> [Docker](https://www.docker.com/) is a platform that *OS-level virtualisation* via a container system. This allows users to define a dedicated virtual operating system with all the required dependencies pre-installed.
+> [Docker](https://www.docker.com/) is a platform that provides *OS-level virtualisation* via a container system. This allows users to define a dedicated virtual operating system with all the required dependencies pre-installed.
 
 --
 
@@ -119,4 +119,4 @@ docker run -it mycosmo
 
 > This would provide the user with a stable container in which the code should work exactly as expected. If Docker images are build for each release of the code, then it should be possible to reproduce the results that were produced at any given time.
 
-> This is not guaranteed to working perfectly, but it goes a long way towards maintaining good standards of reproducible research.[$^{31}$](#/11/32)
+> This is not guaranteed to work perfectly, but it goes a long way towards maintaining good standards of reproducible research.[$^{31}$](#/11/32)

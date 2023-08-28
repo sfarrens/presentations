@@ -184,7 +184,7 @@ pip install ".[test,docs]"
 
 --
 
-> $28$: Note that *pinning* (i.e. setting a version with `==`) is not always a good idea. Packages like Numpy tend to put a lot of effort into making their libraries backwards compatibile. By pinning a dependency we may make our code incompatible with other packages. This really comes down to the scope of our code, whether this is a stand-alone piece of software that should be used in a dedicated environemnt (like a pipeline) or a more something more flexible (like a library) that would be used in conjunction with other packages.
+> $28$: Note that *pinning* (i.e. setting a version with `==`) is not always a good idea. Packages like Numpy tend to put a lot of effort into making their libraries backwards compatibile. By pinning a dependency we may make our code incompatible with other packages. This really comes down to the scope of our code, whether this is a stand-alone piece of software that should be used in a dedicated environemnt (like a pipeline) or something more flexible (like a library) that would be used in conjunction with other packages.
 
 [Return to slide](#/10/6)
 
@@ -202,6 +202,6 @@ pip install ".[test,docs]"
 
 --
 
-> $31$: There are somethings we simply cannot control, such as the physical architecture on which the code is run. While Docker containers are fairly universal, there is no 100% guarantee that things will work perfectly on every computer.
+> $31$: There are some things we simply cannot control, such as the physical architecture on which the code is run. While Docker containers are fairly universal, there is no 100% guarantee that things will work perfectly on every computer.
 
 [Return to slide](#/10/12)
