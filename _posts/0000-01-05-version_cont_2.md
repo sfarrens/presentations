@@ -127,7 +127,7 @@ touch mycosmo/__init__.py
 
 --
 
-> To refactor our code, we will add a new file called `constants.py` with the following content.
+> To refactor our code, we will add a new file to `mycosmo` called `constants.py` with the following content.
 
 ```python
 G = 6.6743e-11
