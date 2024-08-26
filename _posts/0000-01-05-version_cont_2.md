@@ -9,7 +9,7 @@
 
 --
 
-> Both GitHub and GitLab have their own stengths and weaknesses. For your own projects you should choose whichever platform you prefer. It is useful, however, to be familiar with both as for some projects you will have to go along with the platform chosen by the team.[$^4$](#/11/5)
+> Both GitHub and GitLab have their own stengths and weaknesses. For your own projects you should choose whichever platform you prefer. It is useful, however, to be familiar with both as for some projects you will have to go along with the platform chosen by the team.[$^4$](#/12/5)
 
 |                     | GitHub | GitLab |
 | ------------------- | ------ | ------ |
@@ -74,7 +74,7 @@ graph LR;
 git remote add origin <REPOSITORY ADDRESS>
 ```
 
-> Where, `origin` is just an alias for the remote address.[$^5$](#/11/6)
+> Where, `origin` is just an alias for the remote address.[$^5$](#/12/6)
 
 > We can list the currently attached remote addresses with the `-v` option.
 
@@ -84,7 +84,7 @@ git remote -v
 
 --
 
-> We can use the `push` command to upload our local repository to the remote hosting platform.[$^6$](#/11/7)
+> We can use the `push` command to upload our local repository to the remote hosting platform.[$^6$](#/12/7)
 
 ```bash
 git push -u origin main
@@ -153,7 +153,7 @@ def critical_density(redshift, cosmo_dict):
     return (3.0 * H_z_si**2) / (8.0 * np.pi * G)
 ```
 
-> Now, we will add and commit our changes.[$^7$](#/11/8)
+> Now, we will add and commit our changes.[$^7$](#/12/8)
 
 ```bash
 git add -A
@@ -162,7 +162,7 @@ git commit -m "Refactored code, added constants.py module"
 
 --
 
-> Instead of merging these changes locally, we will push the feature branch to our remote repository.[$^8$](#/11/9)
+> Instead of merging these changes locally, we will push the feature branch to our remote repository.[$^8$](#/12/9)
 
 ```bash
 git push origin refactor
@@ -185,7 +185,7 @@ Now, we have to clean everything up!
 
 --
 
-> Start by deleting the remote feature branch (i.e. `refactor` on GitHub/GitLab).[$^9$](#/11/10)
+> Start by deleting the remote feature branch (i.e. `refactor` on GitHub/GitLab).[$^9$](#/12/10)
 
 > Then you need use the `pull` command to download the changes to the `main` branch.
 
@@ -194,7 +194,7 @@ git checkout main
 git pull origin main
 ```
 
-> Now, we can  delete the local feature branch.[$^{10}$](#/11/11)
+> Now, we can  delete the local feature branch.[$^{10}$](#/12/11)
 
 ```bash
 git branch -d refactor

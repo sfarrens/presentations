@@ -28,7 +28,7 @@ Some important questions to ask yourself are:
 
 --
 
-> Let's look at a very simple example. Can you guess what the following function is for? 🤔
+> Let's look at a very simple Python example. Can you guess what the following function is for? 🤔
 
 ```python
 def func(a):
@@ -62,4 +62,25 @@ def hubble(redshift):
 
 > Throughout this lesson we will build upon this simple example to arrive at something that more closely resembles high quality scientific software.
 
-> So, let's get to work! 💪
+--
+
+> We will use some specific tools for improving the quality of our example Python code. However, the coding language and the particular tools are not the real point of the lesson. We will simply follow this use case to demonstrate how to implement some good practices in our development workflow.
+
+> The real take-away should be the concepts behind these practices.
+
+--
+
+Core Concepts
+
++ Management and maintenance
++ Robustness and reliability
++ Interpretation and ease of use 
++ Performance
++ Visibility and interactivity
++ Reproducibility
+
+--
+
+Now, let's get to work! 
+
+#### 💪

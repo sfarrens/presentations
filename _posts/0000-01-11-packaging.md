@@ -10,7 +10,7 @@
 
 --
 
-> Let's write a `pyproject.toml` for our package, which we have called `mycosmo`.[$^{24}$](#/11/25) We need to put this file at the root level of the repository.
+> Let's write a `pyproject.toml` for our package, which we have called `mycosmo`.[$^{24}$](#/12/25) We need to put this file at the root level of the repository.
 
 ```bash
 touch pyproject.toml
@@ -27,7 +27,7 @@ readme = "README.md"
 requires-python = ">=3.11"
 authors = [{ "name" = "Samuel Farrens", "email" = "samuel.farrens@cea.fr" }]
 maintainers = [{ "name" = "Samuel Farrens", "email" = "samuel.farrens@cea.fr" }]
-description = 'This is an example cosmology package.'
+description = "This is an example cosmology package."
 dependencies = ["numpy"]
 version = "0.0.1"
 ```
@@ -57,7 +57,6 @@ docs = [
 ```toml
 test = [
     "pytest",
-    "pytest-black",
     "pytest-cov",
     "pytest-emoji",
     "pytest-pydocstyle",
@@ -69,7 +68,7 @@ test = [
 > Then we can add some other useful tools that check the code style and push the bundled package to PyPI.
 
 ```toml
-lint = ["black"]
+lint = ["black", "isort"]
 release = ["build", "twine"]
 ```
 
@@ -92,7 +91,7 @@ convention = "numpy"
 
 ```toml
 [tool.pytest.ini_options]
-addopts = ["--verbose", "--black", "--emoji", "--pydocstyle", "--cov=mycosmo"]
+addopts = ["--verbose", "--emoji", "--pydocstyle", "--cov=mycosmo"]
 testpaths = ["mycosmo"]
 ```
 
@@ -112,7 +111,7 @@ pip show mycosmo
 
 --
 
-> We can test our optional dependencies as follows.[$^{25}$](#/11/26)
+> We can test our optional dependencies as follows.[$^{25}$](#/12/26)
 
 ```bash
 pip install ".[dev]"
@@ -160,7 +159,7 @@ twine check dist/*
 
 --
 
-> Before actually uploading to the official PyPI registry, we may want to make sure the package looks OK on the [Test PyPI](https://test.pypi.org/).[$^{26}$](#/11/27)
+> Before actually uploading to the official PyPI registry, we may want to make sure the package looks OK on the [Test PyPI](https://test.pypi.org/).[$^{26}$](#/12/27)
 
 ```bash
 twine upload --repository testpypi dist/*
@@ -168,7 +167,7 @@ twine upload --repository testpypi dist/*
 
 --
 
-> Once we are happy with everything, we can upload to the offical PyPI registry.[$^{27}$](#/11/28)
+> Once we are happy with everything, we can upload to the offical PyPI registry.[$^{27}$](#/12/28)
 
 ```bash
 twine upload dist/*

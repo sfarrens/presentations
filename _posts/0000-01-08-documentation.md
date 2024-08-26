@@ -8,7 +8,7 @@
 
 --
 
-> The *README* is usually a *Markdown* file (`README.md`)[$^{12}$](#/11/13) and serves as the entry point for the repository. It should provide concise details on how to install and run the code along with the scope it covers. A good `README.md` could be the difference between someone using your code or not.
+> The *README* is usually a *Markdown* file (`README.md`)[$^{12}$](#/12/13) and serves as the entry point for the repository. It should provide concise details on how to install and run the code along with the scope it covers. A good `README.md` could be the difference between someone using your code or not.
 
 > GitHub and GitLab both offer the option to initialise a repository with a `README.md`.
 
@@ -18,13 +18,13 @@
 
 --
 
-<img src="https://www.jetbrains.com/pycharm/guide/assets/sphinxdoc-5743f4ae.png" alt="Sphinx logo" width="200" class="reveal.imgblock">
+<img src="https://www.jetbrains.com/guide/assets/sphinxdoc-ca1beff5.png" alt="Sphinx logo" width="200" class="reveal.imgblock">
 
 > [Sphinx](https://www.sphinx-doc.org/) is a package that automatically generates API documentation from *docstrings* in Python code written in *reStructuredText* syntax.
 
 --
 
-> We can start building our API documentation by running the following.[$^{13}$](#/11/14)
+> We can start building our API documentation by running the following.[$^{13}$](#/12/14)
 
 ```bash
 mkdir docs
@@ -66,7 +66,7 @@ sys.path.insert(0, os.path.abspath('../..'))
 
 --
 
-> Then we can run the following command to generate source `.rst` files for each of the Python modules.[$^{14}$](#/11/15)
+> Then we can run the following command to generate source `.rst` files for each of the Python modules.[$^{14}$](#/12/15)
 
 ```bash
 sphinx-apidoc -Mfeo docs/source mycosmo
@@ -146,7 +146,7 @@ This module implements various cosmology routines.
 
 --
 
-> We can actually add more detail. For example, the user doesn't know what the `cosmo_dict` dictionary should contain. Let's fix that.[$^{15}$](#/11/16)
+> We can actually add more detail. For example, the user doesn't know what the `cosmo_dict` dictionary should contain. Let's fix that.[$^{15}$](#/12/16)
 
 ```python
     """
@@ -214,7 +214,7 @@ Example
 
 > This will make it significantly easier for someone to use this function for the first time.
 
-> If we enable `sphinx.ext.doctest`, we can even test that the example provided works as expected.[$^{16}$](#/11/17)
+> If we enable `sphinx.ext.doctest`, we can even test that the example provided works as expected.[$^{16}$](#/12/17)
 
 ```bash
 sphinx-build -b doctest -E docs/source docs/build

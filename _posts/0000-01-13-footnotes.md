@@ -68,7 +68,7 @@ git branch -a
 
 --
 
-> $10$: Pro tip 😎: You can clean the list of remote branches (see [$8$](#/11/9)) using the `prune` option.
+> $10$: Pro tip 😎: You can clean the list of remote branches (see [$8$](#/12/9)) using the `prune` option.
 
 ```bash
 git remote prune origin
@@ -86,122 +86,122 @@ git remote prune origin
 
 > $12$: Other *README* formats, such as reStructuredText (`README.rst`), are supported by most hosting platforms.
 
-[Return to slide](#/6/2)
+[Return to slide](#/7/2)
 
 --
 
 > $13$: The `sphinx-quickstart` command will only need to be run once.
 
-[Return to slide](#/6/5)
+[Return to slide](#/7/5)
 
 --
 
 > 14: The `sphinx-apidoc` command will need to be re-run every time we add or remove a module from the package. The `-M` option is short for `--module-first` and puts module documentation before submodule documentation. The `-f` option is short for `--force` and overwrites and existing files. The `-e` option is short for `--separate` and puts each module on its own page. Finally, the `-o` option is short for `--output-dir` and sets the output directory path.
 
-[Return to slide](#/6/8)
+[Return to slide](#/7/8)
 
 --
 
 > $15$: Docstrings need to adhere to reStructuredText formatting standards. The elements with backquotes (` `` `) will be rednered as *literals*.
 
-[Return to slide](#/6/15)
+[Return to slide](#/7/15)
 
 --
 
 > $16$: The `sphinx-build` option `-b` sets the builder to use, in this case `doctest`. The option `-E` ensures that all files are read for the tests.
 
-[Return to slide](#/6/19)
+[Return to slide](#/7/19)
 
 --
 
 > $17$: If the `fail-fast` option is set to `true`, then all jobs will be aborted if any of the tests fails. This can be useful if you have a large *matrix* of jobs. However, some failures will be system dependent, therefore it can also be useful to set this option to `false` and let jobs run to see on which systems the errors occur.
 
-[Return to slide](#/7/4)
+[Return to slide](#/8/4)
 
 --
 
 > $18$: We will only want to deploy one set of HTML pages. Having API documentation for every branch could be very confusing for the users. Therefore, we only want to trigger our CD workflow on the branch for which we want to deploy the documentation. In this case, the `main` branch.
 
-[Return to slide](#/7/8)
+[Return to slide](#/8/8)
 
 --
 
 > $19$: Unlike the unit tests, we don't care about system dependencies for building our API documentation. This is not something we expect the user to do. So, as long as we can get it to work on one machine, we are good.
 
-[Return to slide](#/7/9)
+[Return to slide](#/8/9)
 
 --
 
-> $20$: The `${{ "{{" }} secrets.GITHUB_TOKEN }}` token is set automatically by GitHub, but you will need to allow write permissions (see [here](#/7/13)).
+> $20$: The `${{ "{{" }} secrets.GITHUB_TOKEN }}` token is set automatically by GitHub, but you will need to allow write permissions (see [here](#/8/13)).
 
-[Return to slide](#/7/12)
+[Return to slide](#/8/12)
 
 --
 
 > $21$: `gh-pages` is a special branch name used by GitHub to idenify where HTML content is stored that should be deployed as a website. We don't want to include any other content on the branch. The `--orphan` option for `git checkout` creates a new branch without copying the commit history of the current branch. The `reset` command ensures that the orphan branch is at an inital commit state. The `--allow-empty` option allows us to make a commit without any content.
 
-[Return to slide](#/7/13)
+[Return to slide](#/8/13)
 
 --
 
 > $22$: `.gitlab-ci.yml` is a special file name that should always be used for GitLab CI/CD.
 
-[Return to slide](#/8/1)
+[Return to slide](#/9/1)
 
 --
 
 > $23$: The crazy stuff 😵‍💫 after `coverage` simply formats the total coverage score. This just depends on which tool is used to generate the coverage score.
 
-[Return to slide](#/8/4)
+[Return to slide](#/9/4)
 
 --
 
 > $24$: It is good practice for the name of the directory that contains the Python code, `mycosmo` in this case, to match the package name, which we also call `mycosmo`. However, this is not required to make things work.
 
-[Return to slide](#/9/2)
+[Return to slide](#/10/2)
 
 --
 
-> $25$: Pro tip 😎: We can replace `dev` with any of the options we defined [previously](#/9/5) (e.g. `docs`, `tests`, etc.). We can also combine any of the optional dependencies we like when installing the package. For example, to install both testing and documentation dependendencies, we would run the following.
+> $25$: Pro tip 😎: We can replace `dev` with any of the options we defined [previously](#/10/5) (e.g. `docs`, `tests`, etc.). We can also combine any of the optional dependencies we like when installing the package. For example, to install both testing and documentation dependendencies, we would run the following.
 
 ```bash
 pip install ".[test,docs]"
 ```
 
-[Return to slide](#/9/9)
+[Return to slide](#/10/9)
 
 --
 
 > $26$: ⚠️ You should make sure your package name is not already taken before uploading something to PyPI.
 
-[Return to slide](#/9/15)
+[Return to slide](#/10/15)
 
 --
 
 > $27$: ⚠️ You will need to increase your package version each time you upload a new distribution to PyPI.
 
-[Return to slide](#/9/16)
+[Return to slide](#/10/16)
 
 --
 
 > $28$: Note that *pinning* (i.e. setting a version with `==`) is not always a good idea. Packages like Numpy tend to put a lot of effort into making their libraries backwards compatibile. By pinning a dependency we may make our code incompatible with other packages. This really comes down to the scope of our code, whether this is a stand-alone piece of software that should be used in a dedicated environemnt (like a pipeline) or something more flexible (like a library) that would be used in conjunction with other packages.
 
-[Return to slide](#/10/6)
+[Return to slide](#/11/6)
 
 --
 
 > $29$: This is just an example of a `Dockerfile` that is taking advantage of the predefined Conda environment. It would be just as easy to build a Docker image that does not use Conda at all. The `FROM` command defines the base Docker image on which to build. Each call to `RUN` defines a new *layer* in the image. Lower layers do not not need to be re-built if an upper layer changes. The `COPY` command copies the contents of the current working directory into the build environment. `WORKDIR` sets the defult working directory inside the container. `ENV SHELL` sets the defult environment shell. Finally, `LABEL` simply labels the image.
 
-[Return to slide](#/10/10)
+[Return to slide](#/11/10)
 
 --
 
 > $30$: The Docker `build` option `-t` is short `--tag` and sets a label for the corresponding image. The Docker `run` option `-i` is short for `--interactive` and launches an interactive container. The `-t` option is short for `--tty` and allocates a pseudo-TTY for the container.
 
-[Return to slide](#/10/11)
+[Return to slide](#/11/11)
 
 --
 
 > $31$: There are some things we simply cannot control, such as the physical architecture on which the code is run. While Docker containers are fairly universal, there is no 100% guarantee that things will work perfectly on every computer.
 
-[Return to slide](#/10/12)
+[Return to slide](#/11/12)

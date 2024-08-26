@@ -106,7 +106,7 @@ gitGraph
 
 --
 
-> Let's take another look at our `hubble` function and make some improvements.[$^1$](#/11/2) We can remove the hard-coded cosmological parameters and instead provide a dictionary object as an argument.
+> Let's take another look at our `hubble` function and make some improvements.[$^1$](#/12/2) We can remove the hard-coded cosmological parameters and instead provide a dictionary object as an argument.
 
 ```python
 def hubble(redshift, cosmo_dict):
@@ -169,7 +169,7 @@ git branch critical_density
 
 --
 
-> Running the `branch` command on its own will list the available branches, where you should see a `*` next to `main` and our new `critical_density` branch. To switch to this new branch we use the `checkout` command.[$^2$](#/11/3)
+> Running the `branch` command on its own will list the available branches, where you should see a `*` next to `main` and our new `critical_density` branch. To switch to this new branch we use the `checkout` command.[$^2$](#/12/3)
 
 ```bash
 git checkout critical_density
@@ -257,7 +257,7 @@ gitGraph
 
 > The log will now show that both branches are at the same commit state and `diff` will show no differences between the two branches. 
 
-> This is a good time to **clean up**! We can use the `-d` option for `branch` to delete our merged feature branch.[$^3$](#/11/4)
+> This is a good time to **clean up**! We can use the `-d` option for `branch` to delete our merged feature branch.[$^3$](#/12/4)
 
 ```bash
 git branch -d critical_density

@@ -64,7 +64,6 @@ matter = cosmo_dict["omega_m_0"] * (1 + redshift) ** 4
 
 > There are various pytest plug-ins that can help us improve our code. Some good example are:
 
-- [pytest-black](https://github.com/shopkeep/pytest-black): to check your code style
 - [pytest-cov](https://github.com/pytest-dev/pytest-cov): to provide a *coverage* report
 - [pytest-pydocstyle](https://github.com/henry0312/pytest-pydocstyle): to check your documentation standards
 - [pytest-emoji](https://github.com/hackebrot/pytest-emoji): if you like emojis 😂
@@ -74,13 +73,13 @@ matter = cosmo_dict["omega_m_0"] * (1 + redshift) ** 4
 > We can invoke these extra features using the corresponding command line options.
 
 ```bash
-python -m pytest --verbose --black --emoji --pydocstyle --cov=mycosmo mycosmo
+python -m pytest --verbose --emoji --pydocstyle --cov=mycosmo mycosmo
 ```
 
 > Note that the documentation tests will fail because we done't have any yet! 😰
 <!-- .element: style="font-size: 50%;" -->
 
-> The coverage report tells us which fraction of the code has been covered by unit tests.[$^{11}$](#/11/12)
+> The coverage report tells us which fraction of the code has been covered by unit tests.[$^{11}$](#/12/12)
 
 --
 
@@ -88,4 +87,4 @@ python -m pytest --verbose --black --emoji --pydocstyle --cov=mycosmo mycosmo
 
 > Add a new unit test for the `critical_density` function. Use the [Git workflow](#/4/18) that we established previously to implement the updated code via a MR/PR. 
 
-> It is recommend that you work in pairs with each of you acting as the reviwer for the other's MR/PR.
+> It is recommend that you work in pairs with each of you acting as the reviwer for each other's MR/PR.
