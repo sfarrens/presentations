@@ -53,7 +53,7 @@ conda activate mycosmo
 
 --
 
-> As our software evolves, we could update this environment with any additional dependencies. Then, when we make a specific release of the code (e.g. `mycosmo` v1.0), we can *pin* the versions of the dependencies that we know are working for that release.[$^{28}$](#/12/29)
+> We can use Conda to create an environment that specifies exactly which versions of the packages are working for that release.[$^{28}$](#/13/29)
 
 ```yml
 name: mycosmo
@@ -84,7 +84,7 @@ touch Dockerfile
 
 --
 
-> Inside this file we could add the following content for `mycosmo`.[$^{29}$](#/12/30)
+> Inside this file we could add the following content for `mycosmo`.[$^{29}$](#/13/30)
 
 ```dockerfile
 FROM continuumio/miniconda3
@@ -110,7 +110,7 @@ RUN echo "conda activate mycosmo" >> ~/.bashrc
 docker build -t mycosmo .
 ```
 
-> Then to launch an interactive container the user would use the `run` command.[$^{30}$](#/12/31)
+> Then to launch an interactive container the user would use the `run` command.[$^{30}$](#/13/31)
 
 ```bash
 docker run -it mycosmo
@@ -120,4 +120,6 @@ docker run -it mycosmo
 
 > This would provide the user with a stable container in which the code should work exactly as expected. If Docker images are build for each release of the code, then it should be possible to reproduce the results that were produced at any given time.
 
-> This is not guaranteed to work perfectly, but it goes a long way towards maintaining good standards of reproducible research.[$^{31}$](#/12/32)
+> There are some things we simply cannot control, such as the physical architecture on which the code is run. While Docker containers are fairly universal, there is no 100% guarantee that things will work perfectly on every computer.[$^{31}$](#/13/32)
+
+> This is not guaranteed to work perfectly, but it goes a long way towards maintaining good standards of reproducible research.[$^{31}$](#/13/32)

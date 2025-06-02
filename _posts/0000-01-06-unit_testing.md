@@ -79,7 +79,7 @@ python -m pytest --verbose --emoji --pydocstyle --cov=mycosmo mycosmo
 > Note that the documentation tests will fail because we done't have any yet! 😰
 <!-- .element: style="font-size: 50%;" -->
 
-> The coverage report tells us which fraction of the code has been covered by unit tests.[$^{11}$](#/12/12)
+> The coverage report tells us which fraction of the code has been covered by unit tests.[$^{11}$](#/13/12)
 
 --
 

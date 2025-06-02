@@ -10,7 +10,7 @@
 
 --
 
-> Let's write a `pyproject.toml` for our package, which we have called `mycosmo`.[$^{24}$](#/12/25) We need to put this file at the root level of the repository.
+> Let's write a `pyproject.toml` for our package, which we have called `mycosmo`.[$^{24}$](#/13/25) We need to put this file at the root level of the repository.
 
 ```bash
 touch pyproject.toml
@@ -111,7 +111,7 @@ pip show mycosmo
 
 --
 
-> We can test our optional dependencies as follows.[$^{25}$](#/12/26)
+> We can test our optional dependencies as follows.[$^{25}$](#/13/26)
 
 ```bash
 pip install ".[dev]"
@@ -159,7 +159,7 @@ twine check dist/*
 
 --
 
-> Before actually uploading to the official PyPI registry, we may want to make sure the package looks OK on the [Test PyPI](https://test.pypi.org/).[$^{26}$](#/12/27)
+> Before actually uploading to the official PyPI registry, we may want to make sure the package looks OK on the [Test PyPI](https://test.pypi.org/).[$^{26}$](#/13/27)
 
 ```bash
 twine upload --repository testpypi dist/*
@@ -167,7 +167,7 @@ twine upload --repository testpypi dist/*
 
 --
 
-> Once we are happy with everything, we can upload to the offical PyPI registry.[$^{27}$](#/12/28)
+> Once we are happy with everything, we can upload to the offical PyPI registry.[$^{27}$](#/13/28)
 
 ```bash
 twine upload dist/*

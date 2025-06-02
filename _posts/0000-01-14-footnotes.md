@@ -68,7 +68,7 @@ git branch -a
 
 --
 
-> $10$: Pro tip 😎: You can clean the list of remote branches (see [$8$](#/12/9)) using the `prune` option.
+> $10$: Pro tip 😎: You can clean the list of remote branches (see [$8$](#/14/9)) using the `prune` option.
 
 ```bash
 git remote prune origin
@@ -102,7 +102,7 @@ git remote prune origin
 
 --
 
-> $15$: Docstrings need to adhere to reStructuredText formatting standards. The elements with backquotes (` `` `) will be rednered as *literals*.
+> $15$: Docstrings need to adhere to reStructuredText formatting standards. The elements with backquotes(` `` `) will be rednered as *literals*.
 
 [Return to slide](#/7/15)
 
