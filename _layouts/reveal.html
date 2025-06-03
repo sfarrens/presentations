@@ -15,6 +15,31 @@
 
 		<link rel="stylesheet" href="{{ site.reveal_path }}css/reveal.css">
 		<link rel="stylesheet" href="{{ site.reveal_theme_path }}{{ site.reveal_theme }}" id="theme">
+		<style>
+			.copy-button {
+				position: absolute;
+				top: 0.5rem;
+				right: 0.5rem;
+				padding: 0.25rem 0.5rem;
+				background: rgba(255, 255, 255, 0.1);
+				border: 1px solid rgba(255, 255, 255, 0.2);
+				border-radius: 4px;
+				color: #fff;
+				cursor: pointer;
+				font-size: 0.8rem;
+				opacity: 0;
+				transition: opacity 0.2s;
+			}
+			pre:hover .copy-button {
+				opacity: 1;
+			}
+			.copy-button:hover {
+				background: rgba(255, 255, 255, 0.2);
+			}
+			.copy-button.copied {
+				background: rgba(0, 255, 0, 0.2);
+			}
+		</style>
 {% if site.extra_css %}
 	{% for css_file in site.extra_css %}
 		<link rel="stylesheet" href="{{ css_file }}">
@@ -123,7 +148,33 @@
 					{ src: '{{ site.reveal_path }}lib/js/classList.js', condition: function() { return !document.body.classList; } },
 					{ src: '{{ site.reveal_path }}plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
 					{ src: '{{ site.reveal_path }}plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
-					{ src: '{{ site.reveal_path }}plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: '{{ site.reveal_path }}plugin/highlight/highlight.js', async: true, callback: function() { 
+						hljs.initHighlightingOnLoad();
+						// Add copy buttons to code blocks
+						document.querySelectorAll('pre code').forEach((block) => {
+							const pre = block.parentElement;
+							const button = document.createElement('button');
+							button.className = 'copy-button';
+							button.textContent = 'Copy';
+							pre.style.position = 'relative';
+							pre.appendChild(button);
+
+							button.addEventListener('click', async () => {
+								try {
+									await navigator.clipboard.writeText(block.textContent);
+									button.textContent = 'Copied!';
+									button.classList.add('copied');
+									setTimeout(() => {
+										button.textContent = 'Copy';
+										button.classList.remove('copied');
+									}, 2000);
+								} catch (err) {
+									console.error('Failed to copy text: ', err);
+									button.textContent = 'Failed to copy';
+								}
+							});
+						});
+					}},
 					{ src: '{{ site.reveal_path }}plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
 					{% if site.mermaid_diagrams %}
 					{ src: 'https://cdn.jsdelivr.net/npm/mermaid@10.3.1/dist/mermaid.min.js'},
