@@ -545,14 +545,26 @@ body.dark-mode {
 }
 
 /* reveal.js hides far-away slides via inline `display: none` for
-   performance (and briefly while transitioning out of overview mode).
-   The `!important` flex rules above otherwise defeat that, keeping every
-   slide in the render tree and causing a flash of other slides' content
-   when exiting overview. Let the inline none win when reveal sets it. */
+   performance. The `!important` flex rules above otherwise defeat that,
+   keeping every slide in the render tree. Let the inline none win when
+   reveal sets it. */
 .reveal .slides > section.layout-title[style*="display: none"],
 .reveal .slides > section.layout-slide[style*="display: none"],
 .reveal .slides > section.layout-graphic[style*="display: none"] {
   display: none !important;
+}
+
+/* The actual cause of the overview-exit flash: reveal.css tries to
+   suppress the fade-transition crossfade while leaving overview mode by
+   applying `transition: none` to `.overview-deactivating .slides section`
+   (3 classes + 1 element), but that loses the specificity battle against
+   its own `.reveal.fade .slides section:not([data-transition])` rule
+   (effectively 4 classes/pseudo-classes + 1 element), which still wins
+   and applies its `transition: opacity 0.5s`. So the outgoing slide
+   visibly crossfades over the previously-present slide for half a second
+   instead of snapping instantly. Force the intended instant snap. */
+.reveal.overview-deactivating .slides section {
+  transition: none !important;
 }
 
 /* ════════════════════════════════════════════════════════════
