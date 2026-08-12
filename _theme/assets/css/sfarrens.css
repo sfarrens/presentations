@@ -260,14 +260,17 @@ body.dark-mode .reveal pre {
   border-radius: 0;
 }
 
-.reveal pre.has-lang-label { padding-top: 2.2em; }
+.reveal pre.has-lang-label { padding-top: var(--code-label-h); }
 
 .reveal .code-lang-label {
   position: absolute;
   top: 0;
   left: 0;
   right: 0;
-  padding: 0.25em 0.75em;
+  height: var(--code-label-h);
+  display: flex;
+  align-items: center;
+  padding: 0 0.75em;
   font-family: var(--r-font-sans);
   font-size: 0.75em;
   font-weight: 600;
@@ -276,7 +279,7 @@ body.dark-mode .reveal pre {
   background: rgba(0, 0, 0, 0.03);
   border-bottom: 1px solid var(--r-border);
   border-radius: 6px 6px 0 0;
-  line-height: 1.6;
+  box-sizing: border-box;
   pointer-events: none;
   user-select: none;
   transition: color 0.25s ease, background 0.25s ease, border-color 0.25s ease;
@@ -407,7 +410,7 @@ body.dark-mode .reveal section img {
 /* ── Copy-to-clipboard button ──────────────────────────────── */
 
 /* Use overflow: visible so the button isn't clipped by border-radius */
-.reveal pre { position: relative; overflow: visible; }
+.reveal pre { position: relative; overflow: visible; --code-label-h: 2.2em; }
 
 /* But we still need the code content clipped, so limit overflow on code */
 .reveal pre code { border-radius: 5px; }
@@ -434,6 +437,13 @@ body.dark-mode .reveal section img {
 }
 
 .code-copy-btn svg { pointer-events: none; }
+
+/* When a language label bar is present, center the button within it
+   so it sits perfectly inline with the label text. */
+.reveal pre.has-lang-label .code-copy-btn {
+  top: 0;
+  height: var(--code-label-h);
+}
 
 .reveal pre:hover .code-copy-btn { opacity: 1; }
 
@@ -532,6 +542,17 @@ body.dark-mode {
   flex-direction: column !important;
   text-align: left;
   box-sizing: border-box;
+}
+
+/* reveal.js hides far-away slides via inline `display: none` for
+   performance (and briefly while transitioning out of overview mode).
+   The `!important` flex rules above otherwise defeat that, keeping every
+   slide in the render tree and causing a flash of other slides' content
+   when exiting overview. Let the inline none win when reveal sets it. */
+.reveal .slides > section.layout-title[style*="display: none"],
+.reveal .slides > section.layout-slide[style*="display: none"],
+.reveal .slides > section.layout-graphic[style*="display: none"] {
+  display: none !important;
 }
 
 /* ════════════════════════════════════════════════════════════
