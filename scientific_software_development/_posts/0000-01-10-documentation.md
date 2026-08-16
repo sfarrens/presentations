@@ -1,0 +1,317 @@
+## Documentation
+
+--
+
+> Now that we have a stable and tested code, we need to make sure users understand how to run it and developers understand how to contribute to it.
+
+> There are two main places this needs to be done: a *README* file and *API* documentation.
+
+--
+
+> Following the [Git workflow](#/5) we established previously, let's start by creating a feature branch for this work.
+
+```bash
+git checkout -b docs/api-documentation
+```
+
+--
+
+> The *README* is usually a *Markdown* file (`README.md`)[$^{27}$](#/15/28) and serves as the entry point for the repository. It should provide concise details on how to install and run the code along with the scope it covers. A good `README.md` could be the difference between someone using your code or not.
+
+> GitHub and GitLab both offer the option to initialise a repository with a `README.md`.
+
+--
+
+> The *API* (Application Programming Interface) documentation explains how to use the various components that make up your code (i.e. functions, classes, and other objects). This is extremely useful for other developers, but also for users if your code acts as a library (like e.g. [Numpy](https://numpy.org/)).
+
+--
+
+<img src="https://www.jetbrains.com/guide/assets/sphinxdoc-ca1beff5.png" alt="Sphinx logo" width="200" class="reveal.imgblock">
+
+> [Sphinx](https://www.sphinx-doc.org/) is a package that automatically generates API documentation from *docstrings* in Python code written in *reStructuredText* syntax. It remains the community standard for Python API documentation, especially in the scientific Python ecosystem (NumPy, SciPy, and Astropy all use it).
+
+--
+
+> Since this is a development-only tool, we add it to a `docs` dependency group, the same way we did for `pytest` and `ruff`.
+
+```bash
+uv add --group docs sphinx sphinx-book-theme myst-parser numpydoc
+```
+
+--
+
+> We can start building our API documentation by running the following.[$^{28}$](#/15/29)
+
+```bash
+uv run sphinx-quickstart docs --sep
+```
+
+> You will be prompted for a project name, author, and release version — these can just be `mycosmo`, your name, and `0.1.0`.
+
+--
+
+> Inside `docs/source` we can find a file called `conf.py`, where the configuration options for Sphinx can be set. In particular, various [Sphinx extensions](https://www.sphinx-doc.org/en/master/usage/extensions/index.html). My personal preference is to set the following*:
+
+```python
+extensions = [
+    "sphinx.ext.autodoc",
+    "sphinx.ext.doctest",
+    "sphinx.ext.intersphinx",
+    "sphinx.ext.viewcode",
+    "numpydoc",
+]
+```
+
+> *We will go through and enable each of these extensions as they come up.
+<!-- .element: style="font-size: 50%;" -->
+
+--
+
+> If we have enabled the `sphinx.ext.autodoc` option, we can automatically generate API documentation for all of the modules in our Python package.
+
+> The following command will generate source `.rst` files for each of the Python modules.[$^{29}$](#/15/30)
+
+```bash
+uv run sphinx-apidoc -Mfeo docs/source src/mycosmo
+```
+
+--
+
+> Finally, we can build the HTML containing our API documentation.
+
+```bash
+uv run sphinx-build docs/source docs/build
+```
+
+> If we open `docs/build/index.html` we can see the results. 
+
+> Not very useful so far. 😑
+
+--
+
+> We need to add some docstrings to our modules and functions! Open `cosmology.py` and add the following to the very top of the file.
+
+```python
+"""Cosmology.
+
+This module implements various cosmology routines.
+
+"""
+```
+
+> Now rebuild the HTML files.
+
+--
+
+> You should see the information we added for the corresponding module, which lets the user know what this module contains.
+
+--
+
+> Now, let's add a more detailed docstring to our `hubble` function (right after the function signature).
+
+> Let's start by giving our function a name and a short description of what it does.[$^{30}$](#/15/31)
+
+```python
+    r"""Hubble Parameter.
+
+    Calculate the Hubble parameter at a given redshift using the cosmological
+    parameter values provided.
+
+    """
+```
+
+--
+
+> This is a good start, but we could help the users and other developers better understand how to use this function by explicitly detailing what the expected inputs and outputs of this function are.
+
+> There are various different formatting standards for doing this. My personal preference is [numpydoc](https://numpydoc.readthedocs.io/en/latest/format.html), which we already configured above.
+
+--
+
+> Let's update our function's docstring with the expected inputs according to the `numpydoc` standard.
+
+```python
+    """
+    Parameters
+    ----------
+    redshift : float or numpy.ndarray
+        Redshift(s) at which the Hubble parameter should be calculated
+    cosmo_dict : dict
+        Dictionary of cosmological constants. 
+    """
+```
+
+--
+
+> This lets the user know what the input variable names are, what the expected data types for those variables are and some additional information to better understand what these variables represent.
+
+> We might also find this useful ourselves if we come back to the code after a long break and forget what we have done. 😅
+<!-- .element: style="font-size: 50%;" -->
+
+--
+
+> We can actually add more detail. For example, the user doesn't know what the `cosmo_dict` dictionary should contain. Let's fix that.[$^{31}$](#/15/32)
+
+```python
+    """
+    cosmo_dict : dict
+        Dictionary of cosmological constants. Must contain the following keys:
+
+        * ``H0``: The Hubble parameter value at redshift zero.
+        * ``omega_m_0``: The matter density at redshift zero.
+        * ``omega_k_0``: The curvature density at redshift zero.
+        * ``omega_lambda_0``: The dark energy density at redshift zero.
+    """
+```
+
+--
+
+> Let's do the same thing for the outputs of the function.
+
+```python
+"""
+Returns
+-------
+float or numpy.ndarray
+    Value of the Hubble parameter (km/s/Mpc) at the specified redshift(s)
+    for a given cosmology.
+"""
+```
+
+> Now the user should know what to expect in terms of the output object type and how to interpret the values.
+
+--
+
+> We can take this one step further and add some notes that provide more context for our function.
+
+```python
+"""
+Notes
+-----
+This function implements the calculation of the Hubble parameter as follows:
+
+.. math::
+    H(z) = \sqrt{H_0^2 (\Omega_{m,0}(1+z)^3 + \Omega_{k,0}(1+z)^2 +
+        \Omega_{\Lambda,0})}
+"""
+```
+
+> If we rebuild the docs again, we should see some nice rendered *LaTeX*! 🤓
+
+--
+
+> At this stage we have some pretty decent API documentation for this function, however we can always do more.
+
+> Let's add an example of how to use this function.
+
+--
+
+```python
+"""
+Example
+-------
+>>> from mycosmo.cosmology import hubble
+>>> cosmo_dict = {
+...     "H0": 70,
+...     "omega_m_0": 0.3,
+...     "omega_k_0": 0.0,
+...     "omega_lambda_0": 0.7,
+... }
+>>> float(hubble(0.0, cosmo_dict))
+70.0
+"""
+```
+
+> This will make it significantly easier for someone to use this function for the first time.[$^{32}$](#/15/33)
+
+--
+
+> If we enable `sphinx.ext.doctest`, we can even test that the example provided works as expected.[$^{33}$](#/15/34)
+
+```bash
+uv run sphinx-build -b doctest -E docs/source docs/build
+```
+
+--
+
+> Now that we have some comprehensive documentation for this function, let's make things a bit easier to navigate.
+
+> We can enable the `sphinx.ext.viewcode` extension so that users and other developers can see the actual code implementation within the API documentation.
+
+--
+
+> We can add another useful feature by taking advantage of the `sphinx.ext.intersphinx` extension to link to the core Python API documentation and to other third-party packagies we are using in our project. We just need to provide the appopriate URLs for the packages. 
+
+```python
+intersphinx_mapping = {
+    "python": ("http://docs.python.org/3", None),
+    "numpy": ("https://numpy.org/doc/stable/", None),
+}
+```
+
+> Now users can look up any of the data types we expect as inputs or outputs to our own functions.
+
+--
+
+> We have significantly improved the content of our documentation. However, the default look is still quite... 🤮
+
+> We can fix this by choosing a new [theme](https://sphinx-themes.org/) in `conf.py`
+
+```python
+html_theme = "sphinx_book_theme"
+```
+
+> and rebuilding the HTML.  
+
+> Much better! 🤩
+
+--
+
+> Finally, we can also add custom pages to our `docs/source` directory to include information about how to install the package, which paper should be cited if the code is used, etc.
+
+> The `myst_parser` plug-in makes it possible to add content in *Markdown* instead of *reStructuredText*.
+
+> To view the pages we simply need to make sure they are included under the `toctree` in `index.rst`.
+
+--
+
+> Now that we have docstrings, it's worth going back to our `ruff` configuration in `pyproject.toml` and enabling docstring checks too.[$^{34}$](#/15/35)
+
+```toml
+[tool.ruff.lint]
+select = ["E", "F", "I", "D"]
+
+[tool.ruff.lint.pydocstyle]
+convention = "numpy"
+
+[tool.ruff.lint.per-file-ignores]
+"tests/**" = ["D"]
+```
+
+--
+
+```bash
+uv run ruff check .
+```
+
+> This will point out a few remaining gaps — `critical_density`, `constants.py`, and `__init__.py` still don't have docstrings. We'll leave those for the exercise below.
+
+--
+
+> Make sure the docs build correctly, then add, commit and push all of the changes to the feature branch.[$^{35}$](#/15/36)
+
+```bash
+git add -A
+git commit -m "Add API documentation and docstrings"
+git push origin docs/api-documentation
+```
+
+> Then open a Pull/Merge request as explained in the [previous section](#/5) before merging the changes.
+
+--
+
+## Exercise
+
+> Add docstrings to the `critical_density` function and the remaining modules (`constants.py`, `__init__.py`) — and either document or remove the placeholder `hello()` function `uv init` left in `__init__.py`. Rebuild the HTML to make sure everything renders correctly, and make sure `uv run ruff check .` passes.
+
+> As with the [previous exercise](#/6/12), use the [Git workflow](#/5/22) you learned to implement the changes via a MR/PR. Again it is recommended to work in pairs.
