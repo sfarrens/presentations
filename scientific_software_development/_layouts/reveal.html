@@ -39,6 +39,48 @@
 			.copy-button.copied {
 				background: rgba(0, 255, 0, 0.2);
 			}
+			.reveal .version-badge {
+				display: inline-block;
+				margin-top: 1.5rem;
+				margin-right: 1rem;
+				padding: 0.3rem 0.9rem;
+				background: rgba(255, 255, 255, 0.1);
+				border: 1px solid rgba(255, 255, 255, 0.25);
+				border-radius: 999px;
+				font-size: 0.5em;
+				font-family: monospace;
+				vertical-align: middle;
+				text-decoration: none;
+			}
+			.reveal .version-badge:hover {
+				background: rgba(255, 255, 255, 0.2);
+			}
+			.reveal .issues-button {
+				display: inline-block;
+				margin-top: 1.5rem;
+				padding: 0.3rem 0.9rem;
+				background: rgba(231, 173, 82, 0.15);
+				border: 1px solid #e7ad52;
+				border-radius: 999px;
+				text-decoration: none;
+				font-size: 0.5em;
+				vertical-align: middle;
+			}
+			.reveal .issues-button:hover {
+				background: rgba(231, 173, 82, 0.3);
+				border: 1px solid #e7ad52;
+			}
+			.reveal ol.toc-columns {
+				display: block;
+				column-count: 2;
+				column-gap: 2em;
+				width: 100%;
+				text-align: left;
+			}
+			.reveal ol.toc-columns > li {
+				break-inside: avoid;
+				margin-bottom: 0.4em;
+			}
 		</style>
 {% if site.extra_css %}
 	{% for css_file in site.extra_css %}
@@ -108,6 +150,10 @@
 {%
 						endfor
 %}
+{% if post.version or post.issues_url %}
+
+{% if post.version %}{% if post.changelog_url %}<a class="version-badge" href="{{ post.changelog_url }}" target="_blank" rel="noopener">{{ post.version }}</a>{% else %}<span class="version-badge">{{ post.version }}</span>{% endif %}{% endif %}{% if post.issues_url %}<a class="issues-button" href="{{ post.issues_url }}" target="_blank" rel="noopener">🐛 Report an issue</a>{% endif %}
+{% endif %}
 					</script>
 				</section>
 				{% endfor %}

@@ -1,4 +1,4 @@
-## Version control I
+## Version Control and Packaging I
 ### Introduction to Git
 
 --
@@ -17,7 +17,7 @@
 
 <img src="https://git-scm.com/images/logos/downloads/Git-Logo-1788C.png" alt="Git logo" width="200" class="reveal.imgblock">
 
-> [Git](https://git-scm.com/) is a distrubted version control system developed by [Linus Torvalds](https://en.wikipedia.org/wiki/Linus_Torvalds) (of the *Linux* fame) in the mid 2000s.
+> [Git](https://git-scm.com/) is a distributed version control system developed by [Linus Torvalds](https://en.wikipedia.org/wiki/Linus_Torvalds) (of the *Linux* fame) in the mid 2000s.
 
 > To better familiarise ourselves with Git we will go through some of the basic `git` commands.
 
@@ -30,11 +30,15 @@ mkdir example
 cd example
 ```
 
-> Let's make this a Git repository using the `init` command.
+> Let's make this a Git repository for a Python package called `mycosmo` using the `uv init` command.[$^2$](#/17/3)
 
 ```bash
-git init
+uv init --lib --name mycosmo -p 3.12 .
 ```
+
+> This also initialises a Git repository for us, so there's no need to run `git init` ourselves.
+
+--
 
 > Now, we can check the status of this repository with the `status` command.
 
@@ -42,11 +46,29 @@ git init
 git status
 ```
 
-> Not much going on so far. 🥱
+> You should see that we are on a *branch* called `main`, we have not made any *commits* yet and we have several *untracked* files.[$^3$](#/17/4)
 
 --
 
-> Create a file called `cosmology.py` with the following content.
+> We will go through most of these files in the coming sections, for now run the following command to clean things up.
+
+```bash
+git add . && git commit -m "First commit"
+```
+
+> We will go through these commands more carefully in the following slides.
+
+--
+
+> Let's start by creating a file called `cosmology.py` 
+
+```bash
+touch src/mycosmo/cosmology.py
+```
+
+--
+
+> and pasting in the following content.
 
 ```python
 import numpy as np
@@ -61,7 +83,9 @@ def hubble(redshift):
     return np.sqrt(hubble_const**2 * (matter + curvature + dark_energy))
 ```
 
-> This file contains a very simple function to calculate the [Hubble Parameter](https://en.wikipedia.org/wiki/Hubble%27s_law) *($H(z)$)* as a function of redshift in a matter-dominated universe.*
+--
+
+> This file now contains a very simple function to calculate the [Hubble Parameter](https://en.wikipedia.org/wiki/Hubble%27s_law) *($H(z)$)* as a function of redshift in a matter-dominated universe.*
 
 > *We will be improving this code later on.
 <!-- .element: style="font-size: 50%;" -->
@@ -77,17 +101,17 @@ git status
 > You should see `cosmology.py` listed as an *untracked file*. So, let's add this file to the *staging* area using the `add` command.
 
 ```bash
-git add cosmology.py
+git add src/mycosmo/cosmology.py
 ```
 
 > If you check the status again, you should see this file listed as part of the *changes to be committed*.
 
 --
 
-> We can make our first *commit* (i.e. a labelled state of the code) using the `commit` command.
+> We can make our first proper *commit* (i.e. a labelled state of the code) using the `commit` command.
 
 ```bash
-git commit --message "Added cosmology.py module."
+git commit -m "Add cosmology.py module"
 ```
 
 > Now, we can view a list of our commit states using the `log` command.
@@ -96,17 +120,20 @@ git commit --message "Added cosmology.py module."
 git log
 ```
 
+--
+
 > We can see who authored the commit, when it was made and the message we provided above.
 
 <mermaid>
 gitGraph
        commit id: "First commit"
+       commit id: "Add cosmology.py module"
 </mermaid>
-<!-- .element: style="height: 150px;" -->
+<!-- .element: style="height: 300px;" -->
 
 --
 
-> Let's take another look at our `hubble` function and make some improvements.[$^1$](#/13/2) We can remove the hard-coded cosmological parameters and instead provide a dictionary object as an argument.
+> Let's take another look at our `hubble` function and make some improvements.[$^4$](#/17/5) We can remove the hard-coded cosmological parameters and instead provide a dictionary object as an argument.
 
 ```python
 def hubble(redshift, cosmo_dict):
@@ -118,30 +145,33 @@ def hubble(redshift, cosmo_dict):
     return np.sqrt(hubble_const**2 * (matter + curvature + dark_energy))
 ```
 
-> If you recheck the status, you should see `cosmology.py` listed as *modified*.
-
 --
+
+> If you recheck the status, you should see `cosmology.py` listed as *modified*.
 
 > We can redo the steps to add and commit our modified file and then check the log. 
 
 ```bash
-git add cosmology.py
-git commit --message "Removed hard-coded values."
+git add src/mycosmo/cosmology.py
+git commit -m "Remove hard-coded values"
 git log
 ```
 
-> You should now see two commits with unique 40-character identifiers.
+--
+
+> You should now see three commits with unique 40-character identifiers.
 
 <mermaid>
 gitGraph
        commit id: "First commit"
-       commit id: "Second commit"
+       commit id: "Add cosmology.py module"
+       commit id: "Remove hard-coded values"
 </mermaid>
-<!-- .element: style="height: 150px;" -->
+<!-- .element: style="height: 300px;" -->
 
 --
 
-> We can go back to our first commit state using the `checkout` command.
+> We can go back to our previous commit state using the `checkout` command.
 
 ```bash
 git checkout <GIT COMMIT ID>
@@ -161,34 +191,37 @@ git checkout main
 
 > For example, let's say we would also like to compute the [critical density](https://en.wikipedia.org/wiki/Friedmann_equations#Density_parameter) of the Universe in our `cosmology.py` module.
 
-> We should first create a new branch called e.g. `critical_density` using the `branch` command.
+> We should first create a new branch called e.g. `feature/critical-density` using the `branch` command.[$^5$](#/17/6)
 
 ```bash
-git branch critical_density
+git branch feature/critical-density
 ```
 
 --
 
-> Running the `branch` command on its own will list the available branches, where you should see a `*` next to `main` and our new `critical_density` branch. To switch to this new branch we use the `checkout` command.[$^2$](#/13/3)
+> Running the `branch` command on its own will list the available branches, where you should see a `*` next to `main` and our new `feature/critical-density` branch. To switch to this new branch we use the `checkout` command.[$^6$](#/17/7)
 
 ```bash
-git checkout critical_density
+git checkout feature/critical-density
 ```
+
+--
 
 > The `log` command will show that this branch is at the same commit state as the `main` branch. 
 
 <mermaid>
 gitGraph
        commit id: "First commit"
-       commit id: "Second commit"
-       branch critical_density
-       checkout critical_density
+       commit id: "Add cosmology.py module"
+       commit id: "Remove hard-coded values"
+       branch feature/critical-density
+       checkout feature/critical-density
 </mermaid>
-<!-- .element: style="height: 150px;" -->
+<!-- .element: style="height: 300px;" -->
 
 --
 
-> Now, let's add our critical density function to `cosmology.py` and follow the usual steps to add and commit the changes.
+> Now, let's add our critical density function to `cosmology.py` and follow the same steps to add and commit the changes.
 
 ```python
 def critical_density(redshift, cosmo_dict):
@@ -200,13 +233,13 @@ def critical_density(redshift, cosmo_dict):
 ```
 
 ```bash
-git add cosmology.py
-git commit --message "Added critical density function."
+git add src/mycosmo/cosmology.py
+git commit -m "Add critical density function"
 ```
 
 --
 
-> The log will now show the `critical_density` branch at a different state to that of `main`.
+> The log will now show the `feature/critical-density` branch at a different state to that of `main`.
 
 ```bash
 git log
@@ -214,13 +247,14 @@ git log
 
 <mermaid>
 gitGraph
-       commit id: "1"
-       commit id: "2"
-       branch critical_density
-       checkout critical_density
-       commit id: "3"
+       commit id: "First commit"
+       commit id: "Add cosmology.py module"
+       commit id: "Remove hard-coded values"
+       branch feature/critical-density
+       checkout feature/critical-density
+       commit id: "Add critical density function"
 </mermaid>
-<!-- .element: style="height: 200px;" -->
+<!-- .element: style="height: 400px;" -->
 
 --
 
@@ -238,37 +272,44 @@ git diff main
 
 ```bash
 git checkout main
-git merge critical_density
+git merge feature/critical-density
 ```
-
-<mermaid>
-gitGraph
-       commit id: "1"
-       commit id: "2"
-       branch critical_density
-       checkout critical_density
-       commit id: "3"
-       checkout main
-       merge critical_density id: "merge"
-</mermaid>
-<!-- .element: style="height: 200px;" -->
 
 --
 
 > The log will now show that both branches are at the same commit state and `diff` will show no differences between the two branches. 
 
-> This is a good time to **clean up**! We can use the `-d` option for `branch` to delete our merged feature branch.[$^3$](#/13/4)
+<mermaid>
+gitGraph
+       commit id: "First commit"
+       commit id: "Add cosmology.py module"
+       commit id: "Remove hard-coded values"
+       branch feature/critical-density
+       checkout feature/critical-density
+       commit id: "Add critical density function"
+       checkout main
+       merge feature/critical-density id: "merge"
+</mermaid>
+<!-- .element: style="height: 400px;" -->
+
+--
+
+> This is a good time to **clean up**! We can use the `-d` option for `branch` to delete our merged feature branch.[$^7$](#/17/8)
 
 ```bash
-git branch -d critical_density
+git branch -d feature/critical-density
 ```
+
+--
 
 > The log will look the same as it would if we had always been working in the `main` branch.
 
 <mermaid>
 gitGraph
-       commit id: "1"
-       commit id: "2"
-       commit id: "3"
+       commit id: "First commit"
+       commit id: "Add cosmology.py module"
+       commit id: "Remove hard-coded values"
+       commit id: "Add critical density function"
 </mermaid>
-<!-- .element: style="height: 100px;" -->
+<!-- .element: style="height: 300px;" -->
+
