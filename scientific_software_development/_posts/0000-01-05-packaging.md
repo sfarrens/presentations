@@ -11,7 +11,7 @@
 
 --
 
-> `uv` already created a `pyproject.toml` file for our package, which we have called `mycosmo`.[$^8$](#/15/9) Let's have a look inside.
+> `uv` already created a `pyproject.toml` file for our package, which we have called `mycosmo`.[$^8$](#/17/9) Let's have a look inside.
 
 --
 
@@ -51,7 +51,7 @@ requires = ["uv_build>=0.12.3,<0.13.0"]
 build-backend = "uv_build"
 ```
 
-> A build system is the tool that turns our source code into a distributable, installable package (e.g. a *wheel*); the *build system*  simply tells installers like `pip` or `uv` which backend to use for that job.[$^9$](#/15/10)
+> A build system is the tool that turns our source code into a distributable, installable package (e.g. a *wheel*); the *build system*  simply tells installers like `pip` or `uv` which backend to use for that job.[$^9$](#/17/10)
 
 --
 
@@ -79,7 +79,7 @@ dependencies = [
 ]
 ``` 
 
-> and a new `uv.lock` file was created.[$^{10}$](#/15/11) Let's add and commit these changes.
+> and a new `uv.lock` file was created.[$^{10}$](#/17/11) Let's add and commit these changes.
 
 ```bash
 git add pyproject.toml uv.lock 

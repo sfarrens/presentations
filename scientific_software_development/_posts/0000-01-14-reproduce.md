@@ -8,7 +8,7 @@
 
 --
 
-> We actually already have most of what we need for this: `uv.lock`. Since it pins the exact version of every dependency, direct and transitive, anyone who runs `uv sync` against our repository gets byte-for-byte the same environment we have — no separate reproducibility tooling required.[$^{56}$](#/15/57)
+> We actually already have most of what we need for this: `uv.lock`. Since it pins the exact version of every dependency, direct and transitive, anyone who runs `uv sync` against our repository gets byte-for-byte the same environment we have — no separate reproducibility tooling required.[$^{60}$](#/17/61)
 
 > Some other useful tools for defining consistent environments more broadly are [Conda](https://docs.conda.io/) and [Docker](https://www.docker.com/).
 
@@ -74,7 +74,7 @@ conda activate mycosmo
 
 --
 
-> We can use Conda to create an environment that specifies exactly which versions of the packages are working for that release.[$^{57}$](#/15/58)
+> We can use Conda to create an environment that specifies exactly which versions of the packages are working for that release.[$^{61}$](#/17/62)
 
 ```yml
 name: mycosmo
@@ -105,7 +105,7 @@ touch Dockerfile
 
 --
 
-> Inside this file we could add the following content for `mycosmo`, using the same `uv` base image we already used for GitLab CI.[$^{58}$](#/15/59)[$^{59}$](#/15/60)
+> Inside this file we could add the following content for `mycosmo`, using the same `uv` base image we already used for GitLab CI.[$^{62}$](#/17/63)[$^{63}$](#/17/64)
 
 ```dockerfile
 FROM ghcr.io/astral-sh/uv:python3.12-bookworm-slim
@@ -135,10 +135,10 @@ git commit -m "Add Dockerfile"
 docker build -t mycosmo .
 ```
 
-> Then to launch an interactive container the user would use the `run` command.[$^{60}$](#/15/61)
+> Then to launch an interactive container the user would use the `run` command.[$^{64}$](#/17/65)
 
 ```bash
-docker run -it mycosmo
+docker run -it mycosmo bash
 ```
 
 > Once inside, `uv run pytest`, `uv run python`, etc. all work exactly as they do locally.
@@ -157,4 +157,4 @@ docker run -it mycosmo
 git push origin chore/add-reproducibility-config
 ```
 
-> Then open a Pull/Merge request as explained in the [previous section](#/5) before merging the changes.
+> Then open a Pull/Merge request as explained in the [previous section](#/5) before merging the changes and [cleaning up](#/5/20).

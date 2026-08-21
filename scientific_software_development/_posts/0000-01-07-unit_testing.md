@@ -23,7 +23,7 @@ touch tests/test_cosmology.py
 
 --
 
-> and paste in the following content.[$^{18}$](#/15/19)
+> and paste in the following content.[$^{18}$](#/17/19)
 
 ```python
 import pytest
@@ -102,7 +102,7 @@ uv add --group test pytest-cov pytest-emoji
 uv run pytest --verbose --emoji --cov=mycosmo tests
 ```
 
-> The coverage report tells us which fraction of the code has been covered by unit tests.[$^{19}$](#/15/20)
+> The coverage report tells us which fraction of the code has been covered by unit tests.[$^{19}$](#/17/20)
 
 --
 
@@ -122,7 +122,15 @@ uv run pytest
 
 --
 
-> Make sure all the tests are passing and then add, commit and push all of the changes to the feature branch.[$^{20}$](#/15/21)
+> This leaves us with a `.coverage` file in the repository root — `uv`'s default `.gitignore` doesn't cover it. Let's ignore it before committing.
+
+```bash
+echo -e "\n# Test results\n.coverage" >> .gitignore
+```
+
+--
+
+> Make sure all the tests are passing and then add, commit and push all of the changes to the feature branch.[$^{20}$](#/17/21)
 
 ```bash
 git add -A
@@ -130,7 +138,7 @@ git commit -m "Add unit tests for cosmology module"
 git push origin feature/unit-tests
 ```
 
-> Then open a Pull/Merge request as explained in the [previous section](#/5) before merging the changes.
+> Then open a Pull/Merge request as explained in the [previous section](#/5) before merging the changes and [cleaning up](#/5/20).
 
 --
 

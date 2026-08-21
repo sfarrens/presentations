@@ -30,7 +30,7 @@ mkdir example
 cd example
 ```
 
-> Let's make this a Git repository for a Python package called `mycosmo` using the `uv init` command.[$^2$](#/15/3)
+> Let's make this a Git repository for a Python package called `mycosmo` using the `uv init` command.[$^2$](#/17/3)
 
 ```bash
 uv init --lib --name mycosmo -p 3.12 .
@@ -46,7 +46,7 @@ uv init --lib --name mycosmo -p 3.12 .
 git status
 ```
 
-> You should see that we are on a *branch* called `main`, we have not made any *commits* yet and we have several *untracked* files.[$^3$](#/15/4)
+> You should see that we are on a *branch* called `main`, we have not made any *commits* yet and we have several *untracked* files.[$^3$](#/17/4)
 
 --
 
@@ -108,7 +108,7 @@ git add src/mycosmo/cosmology.py
 
 --
 
-> We can make our first *commit* (i.e. a labelled state of the code) using the `commit` command.
+> We can make our first proper *commit* (i.e. a labelled state of the code) using the `commit` command.
 
 ```bash
 git commit -m "Add cosmology.py module"
@@ -133,7 +133,7 @@ gitGraph
 
 --
 
-> Let's take another look at our `hubble` function and make some improvements.[$^4$](#/15/5) We can remove the hard-coded cosmological parameters and instead provide a dictionary object as an argument.
+> Let's take another look at our `hubble` function and make some improvements.[$^4$](#/17/5) We can remove the hard-coded cosmological parameters and instead provide a dictionary object as an argument.
 
 ```python
 def hubble(redshift, cosmo_dict):
@@ -191,7 +191,7 @@ git checkout main
 
 > For example, let's say we would also like to compute the [critical density](https://en.wikipedia.org/wiki/Friedmann_equations#Density_parameter) of the Universe in our `cosmology.py` module.
 
-> We should first create a new branch called e.g. `feature/critical-density` using the `branch` command.[$^5$](#/15/6)
+> We should first create a new branch called e.g. `feature/critical-density` using the `branch` command.[$^5$](#/17/6)
 
 ```bash
 git branch feature/critical-density
@@ -199,7 +199,7 @@ git branch feature/critical-density
 
 --
 
-> Running the `branch` command on its own will list the available branches, where you should see a `*` next to `main` and our new `feature/critical-density` branch. To switch to this new branch we use the `checkout` command.[$^6$](#/15/7)
+> Running the `branch` command on its own will list the available branches, where you should see a `*` next to `main` and our new `feature/critical-density` branch. To switch to this new branch we use the `checkout` command.[$^6$](#/17/7)
 
 ```bash
 git checkout feature/critical-density
@@ -294,7 +294,7 @@ gitGraph
 
 --
 
-> This is a good time to **clean up**! We can use the `-d` option for `branch` to delete our merged feature branch.[$^7$](#/15/8)
+> This is a good time to **clean up**! We can use the `-d` option for `branch` to delete our merged feature branch.[$^7$](#/17/8)
 
 ```bash
 git branch -d feature/critical-density

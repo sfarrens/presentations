@@ -1,4 +1,4 @@
-# Deployment
+# Publishing
 
 --
 
@@ -18,7 +18,7 @@ git checkout -b chore/add-license
 
 > Before we bundle anything, it's worth adding a *licence* to our repository — this tells others what they are (and aren't) allowed to do with our code. Without one, the default under copyright law is that no one may reuse it at all.
 
-> We will use the [MIT License](https://opensource.org/license/mit), a short, permissive licence that's a common default for small open-source projects.[$^{52}$](#/15/53)
+> We will use the [MIT License](https://opensource.org/license/mit), a short, permissive licence that's a common default for small open-source projects.[$^{56}$](#/17/57)
 
 ```bash
 touch LICENSE
@@ -65,11 +65,11 @@ git commit -m "Add MIT licence"
 git push origin chore/add-license
 ```
 
-> Then open a Pull/Merge request as explained in the [previous section](#/5) before merging the changes.
+> Then open a Pull/Merge request as explained in the [previous section](#/5) before merging the changes and [cleaning up](#/5/20).
 
 --
 
-> Now, we are all set to bundle our package! `uv` can build it directly.[$^{53}$](#/15/54)
+> Now, we are all set to bundle our package! `uv` can build it directly.[$^{57}$](#/17/58)
 
 ```bash
 uv build
@@ -93,11 +93,11 @@ uv publish --dry-run
 
 <img src="https://upload.wikimedia.org/wikipedia/commons/6/64/PyPI_logo.svg" alt="PyPI logo" width="200" class="reveal.imgblock">
 
-> Next, we will need to create an account on [PyPI](https://pypi.org/) (if we have not alredy done so).
+> Next, we will need to create an account on [PyPI](https://pypi.org/) (if we have not already done so).
 
 --
 
-> Before actually uploading to the official PyPI registry, we may want to make sure the package looks OK on the [Test PyPI](https://test.pypi.org/).[$^{54}$](#/15/55)
+> Before actually uploading to the official PyPI registry, we may want to make sure the package looks OK on the [Test PyPI](https://test.pypi.org/).[$^{58}$](#/17/59)
 
 ```bash
 uv publish --publish-url https://test.pypi.org/legacy/
@@ -105,7 +105,7 @@ uv publish --publish-url https://test.pypi.org/legacy/
 
 --
 
-> Once we are happy with everything, we can upload to the offical PyPI registry.[$^{55}$](#/15/56)
+> Once we are happy with everything, we can upload to the official PyPI registry.[$^{59}$](#/17/60)
 
 ```bash
 uv publish

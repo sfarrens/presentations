@@ -9,7 +9,7 @@
 
 --
 
-> Both GitHub and GitLab have their own strengths and weaknesses. For your own projects you should choose whichever platform you prefer. It is useful, however, to be familiar with both as for some projects you will have to go along with the platform chosen by the team.[$^{11}$](#/15/12)
+> Both GitHub and GitLab have their own strengths and weaknesses. For your own projects you should choose whichever platform you prefer. It is useful, however, to be familiar with both as for some projects you will have to go along with the platform chosen by the team.[$^{11}$](#/17/12)
 
 --
 
@@ -28,6 +28,19 @@
 <!-- .element: style="font-size: 80%;" -->
 
 --
+
+> GitHub also recognises several special files that round out what it calls a repository's *Community Standards* — worth adding once a repo has some real activity.
+
+--
+
+- `CONTRIBUTING.md`: how others should propose changes ([docs](https://docs.github.com/en/communities/setting-up-your-project-for-healthy-contributions))
+- `CODE_OF_CONDUCT.md`: expected behaviour for contributors ([docs](https://docs.github.com/en/communities/setting-up-your-project-for-healthy-contributions/adding-a-code-of-conduct-to-your-project))
+- `SECURITY.md`: how to report vulnerabilities privately ([docs](https://docs.github.com/en/code-security/getting-started/adding-a-security-policy-to-your-repository))
+- `.github/ISSUE_TEMPLATE/` and `.github/PULL_REQUEST_TEMPLATE.md`: structured templates for issues and PRs ([docs](https://docs.github.com/en/communities/using-templates-to-encourage-useful-issues-and-pull-requests))
+- `CITATION.cff`: machine-readable citation metadata — GitHub shows a "Cite this repository" button when it's present ([spec](https://citation-file-format.github.io/))
+
+--
+
 
 > Let's go ahead and create a repository called `mycosmo` on either of the two platforms.*
 
@@ -49,18 +62,6 @@ graph LR;
     Leave the rest alone"| c
 </mermaid>
 <!-- .element: style="height: 150px;" -->
-
---
-
-> GitHub also recognises several special files that round out what it calls a repository's *Community Standards* — worth adding once a repo has some real activity.
-
---
-
-- `CONTRIBUTING.md`: how others should propose changes ([docs](https://docs.github.com/en/communities/setting-up-your-project-for-healthy-contributions))
-- `CODE_OF_CONDUCT.md`: expected behaviour for contributors ([docs](https://docs.github.com/en/communities/setting-up-your-project-for-healthy-contributions/adding-a-code-of-conduct-to-your-project))
-- `SECURITY.md`: how to report vulnerabilities privately ([docs](https://docs.github.com/en/code-security/getting-started/adding-a-security-policy-to-your-repository))
-- `.github/ISSUE_TEMPLATE/` and `.github/PULL_REQUEST_TEMPLATE.md`: structured templates for issues and PRs ([docs](https://docs.github.com/en/communities/using-templates-to-encourage-useful-issues-and-pull-requests))
-- `CITATION.cff`: machine-readable citation metadata — GitHub shows a "Cite this repository" button when it's present ([spec](https://citation-file-format.github.io/))
 
 --
 
@@ -88,7 +89,7 @@ graph LR;
 git remote add origin <REPOSITORY ADDRESS>
 ```
 
-> Where, `origin` is just an alias for the remote address.[$^{12}$](#/15/13)
+> Where, `origin` is just an alias for the remote address.[$^{12}$](#/17/13)
 
 --
 
@@ -100,7 +101,7 @@ git remote -v
 
 --
 
-> We can use the `push` command to upload our local repository to the remote hosting platform.[$^{13}$](#/15/14)
+> We can use the `push` command to upload our local repository to the remote hosting platform.[$^{13}$](#/17/14)
 
 ```bash
 git push -u origin main
@@ -162,7 +163,7 @@ def critical_density(redshift, cosmo_dict):
     return (3.0 * H_z_si**2) / (8.0 * np.pi * G)
 ```
 
-> Now, we will add and commit our changes.[$^{14}$](#/15/15)
+> Now, we will add and commit our changes.[$^{14}$](#/17/15)
 
 ```bash
 git add -A
@@ -194,7 +195,7 @@ Now, we have to clean everything up!
 
 --
 
-> Start by deleting the remote feature branch (i.e. `refactor/extract-constants` on GitHub/GitLab).[$^{15}$](#/15/16)[$^{16}$](#/15/17)
+> Start by deleting the remote feature branch (i.e. `refactor/extract-constants` on GitHub/GitLab).[$^{15}$](#/17/16)[$^{16}$](#/17/17)
 
 > Then you need use the `pull` command to download the changes to the `main` branch.
 
@@ -203,7 +204,7 @@ git checkout main
 git pull origin main
 ```
 
-> Now, we can delete the local feature branch.[$^{17}$](#/15/18)
+> Now, we can delete the local feature branch.[$^{17}$](#/17/18)
 
 ```bash
 git branch -d refactor/extract-constants

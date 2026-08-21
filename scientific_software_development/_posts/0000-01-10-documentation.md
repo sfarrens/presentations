@@ -16,7 +16,7 @@ git checkout -b docs/api-documentation
 
 --
 
-> The *README* is usually a *Markdown* file (`README.md`)[$^{27}$](#/15/28) and serves as the entry point for the repository. It should provide concise details on how to install and run the code along with the scope it covers. A good `README.md` could be the difference between someone using your code or not.
+> The *README* is usually a *Markdown* file (`README.md`)[$^{27}$](#/17/28) and serves as the entry point for the repository. It should provide concise details on how to install and run the code along with the scope it covers. A good `README.md` could be the difference between someone using your code or not.
 
 > GitHub and GitLab both offer the option to initialise a repository with a `README.md`.
 
@@ -40,7 +40,7 @@ uv add --group docs sphinx sphinx-book-theme myst-parser numpydoc
 
 --
 
-> We can start building our API documentation by running the following.[$^{28}$](#/15/29)
+> We can start building our API documentation by running the following.[$^{28}$](#/17/29)
 
 ```bash
 uv run sphinx-quickstart docs --sep
@@ -58,6 +58,7 @@ extensions = [
     "sphinx.ext.doctest",
     "sphinx.ext.intersphinx",
     "sphinx.ext.viewcode",
+    "myst_parser",
     "numpydoc",
 ]
 ```
@@ -69,7 +70,7 @@ extensions = [
 
 > If we have enabled the `sphinx.ext.autodoc` option, we can automatically generate API documentation for all of the modules in our Python package.
 
-> The following command will generate source `.rst` files for each of the Python modules.[$^{29}$](#/15/30)
+> The following command will generate source `.rst` files for each of the Python modules.[$^{29}$](#/17/30)
 
 ```bash
 uv run sphinx-apidoc -Mfeo docs/source src/mycosmo
@@ -109,7 +110,7 @@ This module implements various cosmology routines.
 
 > Now, let's add a more detailed docstring to our `hubble` function (right after the function signature).
 
-> Let's start by giving our function a name and a short description of what it does.[$^{30}$](#/15/31)
+> Let's start by giving our function a name and a short description of what it does.[$^{30}$](#/17/31)
 
 ```python
     r"""Hubble Parameter.
@@ -150,7 +151,7 @@ This module implements various cosmology routines.
 
 --
 
-> We can actually add more detail. For example, the user doesn't know what the `cosmo_dict` dictionary should contain. Let's fix that.[$^{31}$](#/15/32)
+> We can actually add more detail. For example, the user doesn't know what the `cosmo_dict` dictionary should contain. Let's fix that.[$^{31}$](#/17/32)
 
 ```python
     """
@@ -208,8 +209,8 @@ This function implements the calculation of the Hubble parameter as follows:
 
 ```python
 """
-Example
--------
+Examples
+--------
 >>> from mycosmo.cosmology import hubble
 >>> cosmo_dict = {
 ...     "H0": 70,
@@ -222,11 +223,11 @@ Example
 """
 ```
 
-> This will make it significantly easier for someone to use this function for the first time.[$^{32}$](#/15/33)
+> This will make it significantly easier for someone to use this function for the first time.[$^{32}$](#/17/33)
 
 --
 
-> If we enable `sphinx.ext.doctest`, we can even test that the example provided works as expected.[$^{33}$](#/15/34)
+> If we enable `sphinx.ext.doctest`, we can even test that the example provided works as expected.[$^{33}$](#/17/34)
 
 ```bash
 uv run sphinx-build -b doctest -E docs/source docs/build
@@ -275,7 +276,7 @@ html_theme = "sphinx_book_theme"
 
 --
 
-> Now that we have docstrings, it's worth going back to our `ruff` configuration in `pyproject.toml` and enabling docstring checks too.[$^{34}$](#/15/35)
+> Now that we have docstrings, it's worth going back to our `ruff` configuration in `pyproject.toml` and enabling docstring checks too.[$^{34}$](#/17/35)
 
 ```toml
 [tool.ruff.lint]
@@ -286,6 +287,7 @@ convention = "numpy"
 
 [tool.ruff.lint.per-file-ignores]
 "tests/**" = ["D"]
+"docs/**" = ["D"]
 ```
 
 --
@@ -298,15 +300,15 @@ uv run ruff check .
 
 --
 
-> Make sure the docs build correctly, then add, commit and push all of the changes to the feature branch.[$^{35}$](#/15/36)
+> Make sure the docs build correctly, then add, commit and push all of the changes to the feature branch.[$^{35}$](#/17/36)
 
 ```bash
 git add -A
-git commit -m "Add API documentation and docstrings"
+git commit --no-verify -m "Add API documentation and docstrings"
 git push origin docs/api-documentation
 ```
 
-> Then open a Pull/Merge request as explained in the [previous section](#/5) before merging the changes.
+> Then open a Pull/Merge request as explained in the [previous section](#/5) before merging the changes and [cleaning up](#/5/20).
 
 --
 
@@ -314,4 +316,4 @@ git push origin docs/api-documentation
 
 > Add docstrings to the `critical_density` function and the remaining modules (`constants.py`, `__init__.py`) — and either document or remove the placeholder `hello()` function `uv init` left in `__init__.py`. Rebuild the HTML to make sure everything renders correctly, and make sure `uv run ruff check .` passes.
 
-> As with the [previous exercise](#/6/12), use the [Git workflow](#/5/22) you learned to implement the changes via a MR/PR. Again it is recommended to work in pairs.
+> As with the [previous exercise](#/6/13), use the [Git workflow](#/5/22) you learned to implement the changes via a MR/PR. Again it is recommended to work in pairs.

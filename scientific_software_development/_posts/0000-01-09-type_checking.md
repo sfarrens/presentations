@@ -2,7 +2,7 @@
 
 --
 
-> `uv init --lib` already gave our package a `py.typed` marker, back in [Introduction to Git](#/3/5), which tells other tools our code ships reliable type hints. Right now nothing backs that claim up — let's fix that.
+> `uv init --lib` already gave our package a `py.typed` marker, back in [Introduction to Git](#/3/4), which tells other tools our code ships reliable type hints. Right now nothing backs that claim up — let's fix that.
 
 > *Type hints* document what types a function expects and returns; a *type checker* then verifies those hints are actually followed, catching a whole class of bugs before the code ever runs.
 
@@ -16,7 +16,7 @@ git checkout -b chore/add-type-checking
 
 --
 
-> [mypy](https://mypy-lang.org/) is the original Python type checker and remains the community standard.[$^{25}$](#/15/26)
+> [mypy](https://mypy-lang.org/) is the original Python type checker and remains the community standard.[$^{25}$](#/17/26)
 
 --
 
@@ -79,7 +79,7 @@ answer: int = "42"
 
 --
 
-> Make sure everything passes, and then add, commit and push all of the changes to the feature branch.[$^{26}$](#/15/27)
+> Make sure everything passes, and then add, commit and push all of the changes to the feature branch.[$^{26}$](#/17/27)
 
 ```bash
 git add -A
@@ -87,4 +87,4 @@ git commit -m "Add type hints and mypy"
 git push origin chore/add-type-checking
 ```
 
-> Then open a Pull/Merge request as explained in the [previous section](#/5) before merging the changes.
+> Then open a Pull/Merge request as explained in the [previous section](#/5) before merging the changes and [cleaning up](#/5/20).

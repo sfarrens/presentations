@@ -76,7 +76,7 @@ class TestAstropy:
 
 --
 
-> We can also verify our critical density calculations.[$^{61}$](#/15/62)
+> We can also verify our critical density calculations.[$^{65}$](#/17/66)
 
 ```python
     @pytest.mark.parametrize("redshift", REDSHIFTS)
@@ -109,15 +109,15 @@ testpaths = ["tests"]
 
 --
 
-> We can still run the verification tests explicitly, by pointing `pytest` directly at that directory.
+> We can still run the verification tests explicitly, by pointing `pytest` directly at that directory. Since `astropy` lives in a separate `verify` group from `pytest` itself, we need both groups synced.[$^{66}$](#/17/67)
 
 ```bash
-uv run pytest tests/verify
+uv run --group test --group verify pytest tests/verify
 ```
 
 --
 
-> Let's add, commit and push the changes to the feature branch.[$^{62}$](#/15/63)
+> Let's add, commit and push the changes to the feature branch.[$^{67}$](#/17/68)
 
 ```bash
 git add -A
@@ -125,7 +125,7 @@ git commit -m "Add verification tests against Astropy"
 git push origin feature/verification-tests
 ```
 
-> Then open a Pull/Merge request as explained in the [previous section](#/5) before merging the changes.
+> Then open a Pull/Merge request as explained in the [previous section](#/5) before merging the changes and [cleaning up](#/5/20).
 
 --
 
@@ -140,4 +140,4 @@ git push origin feature/verification-tests
 
 ## Exercise
 
-> Write a workflow (e.g. GitHub Action) that runs `uv sync --group verify` followed by `uv run pytest tests/verify`, triggered manually via `on: workflow_dispatch` instead of on every push or pull request.
+> Write a workflow (e.g. GitHub Action) that runs `uv sync --group test --group verify` followed by `uv run pytest tests/verify`, triggered manually via `on: workflow_dispatch` instead of on every push or pull request.
