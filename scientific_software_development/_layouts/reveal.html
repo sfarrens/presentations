@@ -4,6 +4,15 @@
 	<head>
 		<meta charset="utf-8">
 
+		<script>
+			// Apply saved theme choice immediately, before CSS loads, to avoid a flash of the wrong theme.
+			(function() {
+				if (localStorage.getItem('reveal-theme') === 'light') {
+					document.documentElement.setAttribute('data-theme', 'light');
+				}
+			})();
+		</script>
+
 		{% if site.title %}<title>{{ site.title }}</title>{% endif %}
 
 		{% if site.description %}<meta name="description" content="{{ site.description }}">{% endif %}
@@ -81,6 +90,112 @@
 				break-inside: avoid;
 				margin-bottom: 0.4em;
 			}
+
+			/* Light/dark theme toggle */
+			.theme-toggle {
+				position: fixed;
+				top: 1rem;
+				right: 1rem;
+				z-index: 100;
+				width: 2.5rem;
+				height: 2.5rem;
+				border-radius: 50%;
+				border: 1px solid rgba(255, 255, 255, 0.25);
+				background: rgba(255, 255, 255, 0.1);
+				color: #eee;
+				font-size: 1.2rem;
+				line-height: 1;
+				cursor: pointer;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				transition: background 0.2s, border-color 0.2s;
+			}
+			.theme-toggle:hover {
+				background: rgba(255, 255, 255, 0.2);
+			}
+			@media print {
+				.theme-toggle {
+					display: none;
+				}
+			}
+
+			/* Light theme overrides. Everything below only applies once
+			   data-theme="light" is set on <html> by the toggle button. */
+			html[data-theme="light"] body {
+				background: #fdfdfd;
+				background-color: #fdfdfd;
+			}
+			html[data-theme="light"] .reveal {
+				color: #222;
+			}
+			html[data-theme="light"] .reveal h1,
+			html[data-theme="light"] .reveal h2,
+			html[data-theme="light"] .reveal h3,
+			html[data-theme="light"] .reveal h4,
+			html[data-theme="light"] .reveal h6 {
+				color: #1a1a1a;
+			}
+			html[data-theme="light"] .reveal h5 {
+				color: #3730a3;
+			}
+			html[data-theme="light"] .reveal em {
+				color: #86198f;
+			}
+			html[data-theme="light"] .reveal code {
+				color: #166534;
+				background-color: #eef1f4;
+			}
+			html[data-theme="light"] .hljs-title,
+			html[data-theme="light"] .hljs-name,
+			html[data-theme="light"] .hljs-selector-id,
+			html[data-theme="light"] .hljs-selector-class,
+			html[data-theme="light"] .hljs-section,
+			html[data-theme="light"] .hljs-type,
+			html[data-theme="light"] .hljs-literal {
+				color: #7a6a00;
+			}
+			html[data-theme="light"] .reveal a {
+				color: #92400e;
+			}
+			html[data-theme="light"] .reveal a:hover {
+				color: #78350f;
+			}
+			html[data-theme="light"] .reveal a:hover img {
+				border-color: #92400e;
+			}
+			html[data-theme="light"] .reveal .controls {
+				color: #92400e;
+			}
+			html[data-theme="light"] .reveal .progress {
+				color: #92400e;
+			}
+			html[data-theme="light"] .theme-toggle {
+				border-color: rgba(0, 0, 0, 0.15);
+				background: rgba(0, 0, 0, 0.06);
+				color: #222;
+			}
+			html[data-theme="light"] .theme-toggle:hover {
+				background: rgba(0, 0, 0, 0.12);
+			}
+			html[data-theme="light"] .copy-button {
+				background: rgba(0, 0, 0, 0.06);
+				border: 1px solid rgba(0, 0, 0, 0.15);
+				color: #222;
+			}
+			html[data-theme="light"] .copy-button:hover {
+				background: rgba(0, 0, 0, 0.12);
+			}
+			html[data-theme="light"] .copy-button.copied {
+				background: rgba(0, 160, 0, 0.15);
+			}
+			html[data-theme="light"] .reveal .version-badge {
+				background: rgba(0, 0, 0, 0.05);
+				border: 1px solid rgba(0, 0, 0, 0.2);
+			}
+			html[data-theme="light"] .reveal .version-badge:hover {
+				background: rgba(0, 0, 0, 0.1);
+			}
 		</style>
 {% if site.extra_css %}
 	{% for css_file in site.extra_css %}
@@ -111,6 +226,30 @@
 	<body>
 
 		<div class="reveal">
+
+			<button id="theme-toggle" class="theme-toggle" aria-label="Toggle light/dark theme" title="Toggle light/dark theme">🌙</button>
+			<script>
+				(function() {
+					var toggle = document.getElementById('theme-toggle');
+					function isLight() {
+						return document.documentElement.getAttribute('data-theme') === 'light';
+					}
+					function updateIcon() {
+						toggle.textContent = isLight() ? '☀️' : '🌙';
+					}
+					updateIcon();
+					toggle.addEventListener('click', function() {
+						if (isLight()) {
+							document.documentElement.removeAttribute('data-theme');
+							localStorage.setItem('reveal-theme', 'dark');
+						} else {
+							document.documentElement.setAttribute('data-theme', 'light');
+							localStorage.setItem('reveal-theme', 'light');
+						}
+						updateIcon();
+					});
+				})();
+			</script>
 
 			<div class="slides">
 
